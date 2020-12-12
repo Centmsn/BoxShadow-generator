@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 const CodeOutput = () => {
-  return <Wrapper>code</Wrapper>;
+  return <Wrapper></Wrapper>;
 };
 
 const Wrapper = styled.div`
-  grid-area: 11/1/13/3;
+  grid-area: 11/2/13/3;
 
-  background-color: green;
+  border: ${({ theme }) => theme.border};
+  border-radius: 5px;
 `;
 
 export default CodeOutput;

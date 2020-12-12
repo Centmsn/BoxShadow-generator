@@ -1,28 +1,23 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-const Draggable = () => {
-  const [position, setPosition] = useState(0);
-
+const Draggable = ({ func, position }) => {
   const startDrag = () => {
-    document.addEventListener("mousemove", dragElement);
+    document.addEventListener("mousemove", func);
     document.addEventListener("mouseup", stopDrag);
   };
 
   const stopDrag = () => {
-    document.removeEventListener("mousemove", dragElement);
+    document.removeEventListener("mousemove", func);
     document.removeEventListener("mouseup", stopDrag);
   };
 
-  const dragElement = (e) => {
-    setPosition(e.clientX);
-  };
-
-  return <DraggableEl onMouseDown={startDrag} left={position} />;
+  return <DraggableEl onMouseDown={startDrag} position={position} />;
 };
 
 const DraggableEl = styled.div.attrs((props) => ({
-  left: props.left,
+  style: {
+    left: props.position,
+  },
 }))`
   position: absolute;
   height: 140%;

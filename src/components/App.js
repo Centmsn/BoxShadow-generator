@@ -3,7 +3,7 @@ import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Options from "./Options";
 import List from "./List";
 import CodeOutput from "./CodeOutput";
-import Preview from "./Preview";
+import Preview from "./Preview/Preview";
 
 const App = () => {
   return (
@@ -32,7 +32,9 @@ const GlobalStyle = createGlobalStyle`
 const theme = {
   font: "'Baloo 2', cursive",
   darkBlue: "rgb(0, 32, 84)",
+  darkBlueTransparent: "rgb(0, 32, 84, 0.75)",
   lightBlue: "rgb(175, 193, 222)",
+  border: "2px solid rgb(0, 32, 84)",
 };
 
 const Wrapper = styled.div`
@@ -44,6 +46,7 @@ const Wrapper = styled.div`
   grid-template-rows: repeat(12, 1fr);
   gap: 10px;
 
+  padding: 10px;
   overflow: hidden;
 `;
 

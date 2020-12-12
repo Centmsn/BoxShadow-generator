@@ -2,12 +2,15 @@ import styled from "styled-components";
 
 import Draggable from "./Draggable";
 
-const Bar = ({ text }) => {
+const Bar = ({ text, func }) => {
+  const position = 100;
+
   return (
     <Wrapper>
       <Label>{text.toUpperCase()}</Label>
       <OptionBar>
-        <Draggable />
+        <InnerBar />
+        <Draggable func={func} position={position} />
       </OptionBar>
     </Wrapper>
   );
@@ -26,6 +29,20 @@ const OptionBar = styled.div`
 
   border: 2px solid ${({ theme }) => theme.darkBlue};
   border-radius: 5px;
+`;
+
+const InnerBar = styled.div`
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+  transform: scaleX(0);
+
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.lightBlue};
 `;
 
 const Label = styled.p`

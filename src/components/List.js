@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 const List = () => {
-  return <Wrapper>list</Wrapper>;
+  return <Wrapper></Wrapper>;
 };
 
 const Wrapper = styled.div`
-  grid-area: 6/1/11/2;
+  grid-area: 6/1/13/2;
 
-  background-color: blue;
+  border: ${({ theme }) => theme.border};
+  border-radius: 5px;
 `;
 
 export default List;
