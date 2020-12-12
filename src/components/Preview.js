@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 import Gallery from "./Gallery";
+import PreviewSettings from "./PreviewSettings";
 
 const Preview = () => {
   return (
     <Wrapper>
       <OptionBar>
         <Gallery />
+        <PreviewSettings />
       </OptionBar>
     </Wrapper>
   );

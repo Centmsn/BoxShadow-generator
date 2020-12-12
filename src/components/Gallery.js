@@ -1,15 +1,17 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 const Gallery = () => {
-  return <Wrapper></Wrapper>;
+  return (
+    <Wrapper>
+      <FontAwesomeIcon icon={faImage} />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
-  width: 50px;
-  height: 50px;
-
   border-radius: 50%;
-  background-color: orange;
 `;
 
 export default Gallery;

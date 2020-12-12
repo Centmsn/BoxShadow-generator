@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 
 import Options from "./Options";
 import List from "./List";
@@ -7,13 +7,32 @@ import Preview from "./Preview";
 
 const App = () => {
   return (
-    <Wrapper>
-      <List />
-      <Options />
-      <Preview />
-      <CodeOutput />
-    </Wrapper>
+    <>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Wrapper>
+          <List />
+          <Options />
+          <Preview />
+          <CodeOutput />
+        </Wrapper>
+      </ThemeProvider>
+    </>
   );
+};
+
+const GlobalStyle = createGlobalStyle`
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+`;
+
+const theme = {
+  font: "'Baloo 2', cursive",
+  darkBlue: "rgb(0, 32, 84)",
+  lightBlue: "rgb(175, 193, 222)",
 };
 
 const Wrapper = styled.div`
