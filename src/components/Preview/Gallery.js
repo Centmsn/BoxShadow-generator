@@ -17,9 +17,11 @@ const Gallery = ({ visibility, setVisibility }) => {
 };
 
 const Nav = styled.div.attrs((props) => ({
-  style: { color: props.active ? props.theme.darkBlue : props.theme.lightBlue },
+  style: { color: props.active ? props.theme.darkBlue : null },
 }))`
   margin-right: 15px;
+
+  color: ${({ theme }) => theme.lightBlue};
   cursor: pointer;
   transition: 300ms;
 

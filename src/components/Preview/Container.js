@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const Container = ({ visible }) => {
-  return <Wrapper visible={visible}></Wrapper>;
+const Container = ({ visible, children }) => {
+  return <Wrapper visible={visible}>{children}</Wrapper>;
 };
 
 const Wrapper = styled.div.attrs((props) => ({
@@ -15,10 +15,18 @@ const Wrapper = styled.div.attrs((props) => ({
   left: 0;
   right: 0;
 
-  background-color: ${({ theme }) => theme.darkBlueTransparent};
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
   border: ${({ theme }) => theme.border};
   border-radius: 5px;
+
+  font-family: ${({ theme }) => theme.font};
+  font-size: 1rem;
+  background-color: ${({ theme }) => theme.darkBlueTransparent};
+  color: white;
 
   transition: 300ms;
 `;
