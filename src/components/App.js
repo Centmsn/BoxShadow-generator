@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 
-import Options from "./Options";
-import List from "./List";
+import Options from "./Options/Options";
+import List from "./List/List";
 import CodeOutput from "./CodeOutput";
 import Preview from "./Preview/Preview";
 
@@ -34,6 +34,7 @@ const theme = {
   darkBlue: "rgb(0, 32, 84)",
   darkBlueTransparent: "rgb(0, 32, 84, 0.75)",
   lightBlue: "rgb(175, 193, 222)",
+  lightGray: "rgb(160, 160, 160)",
   border: "2px solid rgb(0, 32, 84)",
 };
 

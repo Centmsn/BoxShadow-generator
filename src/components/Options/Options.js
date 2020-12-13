@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import Bar from "./Bar";
 import Checkbox from "./Checkbox";
+import RGBColor from "./RGBColor";
 
 const Options = () => {
   const [positionX, setPositionX] = useState(0);
@@ -25,19 +26,26 @@ const Options = () => {
         position={positionY}
         initial="center"
         setPosition={setPositionY}
+        min={-50}
+        max={50}
       />
       <Bar
         text="Spread"
         position={positionSpread}
         initial="left"
         setPosition={setPositionSpread}
+        min={0}
+        max={50}
       />
       <Bar
         text="Blur"
         position={positionBlur}
         initial="left"
         setPosition={setPositionBlur}
+        min={0}
+        max={50}
       />
+      <RGBColor />
       <Checkbox text="Inset" />
     </Wrapper>
   );

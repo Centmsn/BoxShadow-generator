@@ -89,7 +89,7 @@ const Section = styled.section`
   flex-basis: 100%;
 
   label {
-    color: rgb(160, 160, 160);
+    color: ${({ theme }) => theme.lightGray};
   }
 `;
 

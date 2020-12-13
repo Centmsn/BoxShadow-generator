@@ -25,6 +25,8 @@ const Checkbox = ({ text }) => {
 };
 
 const Wrapper = styled.div`
+  flex-basis: 30%;
+
   display: flex;
   justify-content: right;
 `;

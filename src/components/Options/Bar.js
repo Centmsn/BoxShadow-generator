@@ -32,14 +32,15 @@ const Bar = ({ text, min, max, position, initial, setPosition }) => {
     setPosition(positionX);
     setInnerBarWidth(positionX + 5);
 
-    updateBarInfo(width, e);
+    updateBarInfo(width, left, e);
   };
 
-  const updateBarInfo = (width, e) => {
+  const updateBarInfo = (width, left, e) => {
     const base = (Math.abs(min) + max) / width;
     let info;
 
     if (min === 0) {
+      info = Math.floor((e.clientX - left) * base);
     } else {
       const middle = width / 2 - 15;
 
