@@ -47,10 +47,15 @@ const Box = styled.div`
 
   padding: 3px;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.lightBlue};
+  }
 `;
 
 const Info = styled.p`
   line-height: 25px;
+  user-select: none;
 `;
 
 export default Checkbox;
