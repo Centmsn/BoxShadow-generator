@@ -12,7 +12,7 @@ const Bar = ({ text, min, max, position, initial, setPosition }) => {
     const { width } = bar.current.getBoundingClientRect();
 
     if (initial === "center") {
-      setPosition(width / 2);
+      setPosition(width / 2 - 15);
       setInnerBarWidth(width / 2 + 5);
     } else if (initial === "left") {
       setPosition(-2);
@@ -21,7 +21,8 @@ const Bar = ({ text, min, max, position, initial, setPosition }) => {
 
   const handlePositionChange = (e) => {
     const { width, left } = bar.current.getBoundingClientRect();
-    let positionX = e.clientX - left - 10;
+
+    let positionX = e.clientX - left - 15;
 
     if (positionX > width - 30) {
       positionX = width - 30;
@@ -30,6 +31,25 @@ const Bar = ({ text, min, max, position, initial, setPosition }) => {
     }
     setPosition(positionX);
     setInnerBarWidth(positionX + 5);
+
+    updateBarInfo(width, e);
+  };
+
+  const updateBarInfo = (width, e) => {
+    const base = (Math.abs(min) + max) / width;
+    let info;
+
+    if (min === 0) {
+    } else {
+      const middle = width / 2 - 15;
+
+      info = Math.floor((e.clientX - middle) * base) - 41;
+    }
+
+    if (info > max) info = max;
+    else if (info < min) info = min;
+
+    setBarInfo(info);
   };
 
   return (
