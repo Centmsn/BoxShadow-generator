@@ -1,0 +1,2 @@
+export const SETBGCOL = "SETBGCOL";
+export const SETEXAMPLECOL = "SETEXAMPLECOL";

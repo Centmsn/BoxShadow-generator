@@ -10,6 +10,8 @@ const List = () => {
       <AddBtn>
         <FontAwesomeIcon icon={faPlusSquare} />
       </AddBtn>
+
+      <ListElement />
     </Wrapper>
   );
 };

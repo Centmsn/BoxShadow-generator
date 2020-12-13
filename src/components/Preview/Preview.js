@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -5,7 +6,7 @@ import Gallery from "./Gallery";
 import PreviewSettings from "./PreviewSettings";
 import DisplayResult from "../DisplayResult";
 
-const Preview = () => {
+const Preview = ({ bg, example }) => {
   const [settingsVisibility, setSettingsVisibility] = useState(false);
   const [galleryVisibility, setGalleryVisibility] = useState(false);
 
@@ -27,7 +28,7 @@ const Preview = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper r={bg.r} g={bg.g} b={bg.b}>
       <OptionBar>
         <Gallery
           visibility={galleryVisibility}
@@ -38,7 +39,7 @@ const Preview = () => {
           setVisibility={() => toggleVisibility(1)}
         />
       </OptionBar>
-      <DisplayResult />
+      <DisplayResult r={example.r} g={example.g} b={example.b} />
     </Wrapper>
   );
 };
@@ -50,6 +51,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  border-radius: 5px;
+
+  background-color: ${({ r, g, b }) => `rgb(${r}, ${g}, ${b})`};
 `;
 
 const OptionBar = styled.div`
@@ -61,4 +66,13 @@ const OptionBar = styled.div`
   display: flex;
 `;
 
-export default Preview;
+const mapStateToProps = (state) => {
+  const { bg, example } = state.preview;
+
+  return {
+    bg,
+    example,
+  };
+};
+
+export default connect(mapStateToProps, null)(Preview);

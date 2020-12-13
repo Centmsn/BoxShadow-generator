@@ -1,5 +1,9 @@
 import { combineReducers } from "redux";
 
-const reducers = combineReducers({});
+import preview from "./Preview";
+
+const reducers = combineReducers({
+  preview,
+});
 
 export default reducers;
