@@ -25,12 +25,13 @@ const Wrapper = styled.div`
 `;
 
 const AddBtn = styled.button`
+  z-index: 999;
   position: absolute;
-  width: 35px;
-  height: 35px;
+  width: 28px;
+  height: 28px;
 
-  top: -15px;
-  right: -15px;
+  top: -10px;
+  right: -10px;
 
   display: flex;
   justify-content: center;
@@ -43,7 +44,7 @@ const AddBtn = styled.button`
   background-color: ${({ theme }) => theme.darkBlue};
   color: white;
 
-  font-size: 1.75rem;
+  font-size: 1.4rem;
 
   cursor: pointer;
 

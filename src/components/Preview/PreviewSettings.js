@@ -3,6 +3,7 @@ import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { faEraser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import { useState } from "react";
 
 import Container from "./Container";
 import { setBgCol, setBoxCol } from "../../actions";
@@ -15,6 +16,9 @@ const PreviewSettings = ({
   bg,
   example,
 }) => {
+  const [colorError, setColorError] = useState({});
+  const [resetError, setResetError] = useState("");
+
   const handleBoxColorChange = (e, index, type) => {
     // 1 - R
     // 2 - G
@@ -27,6 +31,13 @@ const PreviewSettings = ({
       val = 0;
     } else if (val > 255) {
       val = 255;
+      if (Object.entries(colorError).length === 0) {
+        setColorError({ type, index });
+
+        setTimeout(() => {
+          setColorError({});
+        }, 3500);
+      }
     } else if (val.match(/^0{2,}/)) {
       val = 0;
     } else if (val.match(/^0\d/)) {
@@ -69,9 +80,28 @@ const PreviewSettings = ({
   };
 
   const handleSettingsReset = () => {
+    if (
+      bg.r === 255 &&
+      bg.g === 255 &&
+      bg.b === 255 &&
+      example.r === 175 &&
+      example.g === 193 &&
+      example.b === 222 &&
+      !resetError
+    ) {
+      setResetError("Already using default values");
+
+      setTimeout(() => {
+        setResetError("");
+      }, 5000);
+    }
+
     setBgCol(255, 255, 255);
     setBoxCol(175, 193, 222);
   };
+
+  const boxTooltip = colorError.type === "box" ? "Range is 0-255" : null;
+  const bgTooltip = colorError.type === "bg" ? "Range is 0-255" : null;
 
   return (
     <>
@@ -89,6 +119,11 @@ const PreviewSettings = ({
               value={example.r}
               onChange={(e) => handleBoxColorChange(e, 1, "box")}
               maxLength={3}
+              error={
+                colorError.type === "box" && colorError.index === 1
+                  ? true
+                  : false
+              }
             />
           </label>
 
@@ -98,6 +133,11 @@ const PreviewSettings = ({
               value={example.g}
               onChange={(e) => handleBoxColorChange(e, 2, "box")}
               maxLength={3}
+              error={
+                colorError.type === "box" && colorError.index === 2
+                  ? true
+                  : false
+              }
             />
           </label>
 
@@ -107,8 +147,14 @@ const PreviewSettings = ({
               value={example.b}
               onChange={(e) => handleBoxColorChange(e, 3, "box")}
               maxLength={3}
+              error={
+                colorError.type === "box" && colorError.index === 3
+                  ? true
+                  : false
+              }
             />
           </label>
+          <Tooltip>{boxTooltip}</Tooltip>
         </Section>
 
         <Section>
@@ -120,6 +166,11 @@ const PreviewSettings = ({
               value={bg.r}
               onChange={(e) => handleBoxColorChange(e, 1, "bg")}
               maxLength={3}
+              error={
+                colorError.type === "bg" && colorError.index === 1
+                  ? true
+                  : false
+              }
             />
           </label>
 
@@ -129,6 +180,11 @@ const PreviewSettings = ({
               value={bg.g}
               onChange={(e) => handleBoxColorChange(e, 2, "bg")}
               maxLength={3}
+              error={
+                colorError.type === "bg" && colorError.index === 2
+                  ? true
+                  : false
+              }
             />
           </label>
 
@@ -138,8 +194,14 @@ const PreviewSettings = ({
               value={bg.b}
               onChange={(e) => handleBoxColorChange(e, 3, "bg")}
               maxLength={3}
+              error={
+                colorError.type === "bg" && colorError.index === 3
+                  ? true
+                  : false
+              }
             />
           </label>
+          <Tooltip>{bgTooltip}</Tooltip>
         </Section>
 
         <Section>
@@ -147,6 +209,7 @@ const PreviewSettings = ({
           <ResetBtn onClick={handleSettingsReset}>
             <FontAwesomeIcon icon={faEraser} />
           </ResetBtn>
+          <Tooltip>{resetError}</Tooltip>
         </Section>
       </Container>
     </>
@@ -176,7 +239,8 @@ const ColorInput = styled.input`
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom: 2px solid ${({ theme }) => theme.lightBlue};
+  border-bottom: 2px solid
+    ${(props) => (props.error ? "red" : props.theme.lightBlue)};
   outline: none;
 
   font-family: ${({ theme }) => theme.font};
@@ -186,6 +250,17 @@ const ColorInput = styled.input`
 
 const Section = styled.section`
   flex-basis: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    flex-basis: 100%;
+
+    text-align: center;
+  }
 
   label {
     color: ${({ theme }) => theme.lightGray};
@@ -206,6 +281,15 @@ const ResetBtn = styled.button`
   &:hover {
     color: ${({ theme }) => theme.lightBlue};
   }
+`;
+
+const Tooltip = styled.p`
+  flex-basis: 100%;
+  height: 1rem;
+
+  text-align: center;
+
+  color: ${({ theme }) => theme.lightGray};
 `;
 
 const mapStateToProps = (state) => {
