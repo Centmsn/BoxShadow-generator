@@ -1,4 +1,9 @@
-import { SETBGCOL, SETEXAMPLECOL } from "./types";
+import {
+  SETBGCOL,
+  SETEXAMPLECOL,
+  ADDBOXSHADOW,
+  REMOVEBOXSHADOW,
+} from "./types";
 
 export const setBgCol = (r, g, b) => {
   return {
@@ -11,5 +16,18 @@ export const setBoxCol = (r, g, b) => {
   return {
     type: SETEXAMPLECOL,
     payload: { r, g, b },
+  };
+};
+
+export const addBoxShadow = () => {
+  return {
+    type: ADDBOXSHADOW,
+  };
+};
+
+export const removeBoxShadow = (id) => {
+  return {
+    type: REMOVEBOXSHADOW,
+    payload: id,
   };
 };

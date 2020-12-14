@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-const DisplayResult = ({ r, g, b }) => {
-  return <ExampleBox r={r} g={g} b={b}></ExampleBox>;
+const DisplayResult = ({ r, g, b, list }) => {
+  return <ExampleBox r={r} g={g} b={b} code={list}></ExampleBox>;
 };
 
-const ExampleBox = styled.div`
+const ExampleBox = styled.div.attrs((props) => ({
+  style: {
+    boxShadow: props.code,
+  },
+}))`
   width: 200px;
   height: 200px;
 

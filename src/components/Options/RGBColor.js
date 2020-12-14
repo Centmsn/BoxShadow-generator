@@ -17,6 +17,11 @@ const RGBColor = () => {
         B
         <ColorInput type="number" />
       </label>
+
+      <label>
+        A
+        <ColorInput type="number" />
+      </label>
     </Wrapper>
   );
 };

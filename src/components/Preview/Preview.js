@@ -6,7 +6,7 @@ import Gallery from "./Gallery";
 import PreviewSettings from "./PreviewSettings";
 import DisplayResult from "../DisplayResult";
 
-const Preview = ({ bg, example }) => {
+const Preview = ({ bg, example, list }) => {
   const [settingsVisibility, setSettingsVisibility] = useState(false);
   const [galleryVisibility, setGalleryVisibility] = useState(false);
 
@@ -27,6 +27,20 @@ const Preview = ({ bg, example }) => {
     }
   };
 
+  const renderCode = () => {
+    let code = "";
+
+    for (let i = 0; i < list.length; i++) {
+      if (i === 0) {
+        code += list[i];
+      } else {
+        code += `, ${list[i]}`;
+      }
+    }
+
+    return code;
+  };
+
   return (
     <Wrapper r={bg.r} g={bg.g} b={bg.b}>
       <OptionBar>
@@ -39,7 +53,12 @@ const Preview = ({ bg, example }) => {
           setVisibility={() => toggleVisibility(1)}
         />
       </OptionBar>
-      <DisplayResult r={example.r} g={example.g} b={example.b} />
+      <DisplayResult
+        r={example.r}
+        g={example.g}
+        b={example.b}
+        list={renderCode()}
+      />
     </Wrapper>
   );
 };
@@ -70,6 +89,7 @@ const mapStateToProps = (state) => {
   const { bg, example } = state.preview;
 
   return {
+    list: state.boxShadowList,
     bg,
     example,
   };

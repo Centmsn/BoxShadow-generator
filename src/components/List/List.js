@@ -1,17 +1,26 @@
-import styled from "styled-components";
+import { connect } from "react-redux";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
 
 import ListElement from "./ListElement";
+import { addBoxShadow } from "../../actions";
 
-const List = () => {
+const List = ({ addBoxShadow, list }) => {
+  const handleBoxShadowAdd = () => {
+    addBoxShadow();
+  };
+
+  const renderList = () =>
+    list.map((el, index) => <ListElement code={el} id={index} list={list} />);
+
   return (
     <Wrapper>
-      <AddBtn>
+      <AddBtn onClick={handleBoxShadowAdd}>
         <FontAwesomeIcon icon={faPlusSquare} />
       </AddBtn>
 
-      <ListElement />
+      {renderList()}
     </Wrapper>
   );
 };
@@ -22,6 +31,11 @@ const Wrapper = styled.div`
 
   border: ${({ theme }) => theme.border};
   border-radius: 5px;
+
+  font-family: ${({ theme }) => theme.font};
+
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const AddBtn = styled.button`
@@ -53,4 +67,10 @@ const AddBtn = styled.button`
   }
 `;
 
-export default List;
+const mapStateToProps = (state) => {
+  return {
+    list: state.boxShadowList,
+  };
+};
+
+export default connect(mapStateToProps, { addBoxShadow })(List);
