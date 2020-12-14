@@ -39,20 +39,15 @@ const Wrapper = styled.div`
 `;
 
 const AddBtn = styled.button`
-  z-index: 999;
-  position: absolute;
-  width: 28px;
+  width: 100%;
   height: 28px;
-
-  top: -10px;
-  right: -10px;
+  margin-bottom: 15px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   border: none;
-  border-radius: 5px;
   outline: none;
 
   background-color: ${({ theme }) => theme.darkBlue};
@@ -63,7 +58,7 @@ const AddBtn = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.lightBlue};
+    background-color: ${({ theme }) => theme.lightBlue};
   }
 `;
 

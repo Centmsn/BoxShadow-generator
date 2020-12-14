@@ -35,7 +35,7 @@ const theme = {
   darkBlueTransparent: "rgb(0, 32, 84, 0.8)",
   lightBlue: "rgb(175, 193, 222)",
   lightGray: "rgb(160, 160, 160)",
-  border: "2px solid rgb(0, 32, 84)",
+  border: "4px solid rgb(0, 32, 84)",
 };
 
 const Wrapper = styled.div`

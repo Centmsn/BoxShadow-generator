@@ -1,11 +1,11 @@
 import { ADDBOXSHADOW, REMOVEBOXSHADOW } from "../actions/types";
 
-const INITIAL_STATE = ["0 0 4px 4px rgba(0, 0, 0, 0)"];
+const INITIAL_STATE = ["0 0 4px 4px rgba(0, 0, 0, 1)"];
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADDBOXSHADOW:
-      return [...state, "0 0 4px 4px black"];
+      return [...state, "0 0 4px 4px rgba(0, 0, 0, 1)"];
 
     case REMOVEBOXSHADOW:
       const newState = [...state];

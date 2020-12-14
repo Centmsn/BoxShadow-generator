@@ -3,6 +3,7 @@ import {
   SETEXAMPLECOL,
   ADDBOXSHADOW,
   REMOVEBOXSHADOW,
+  CHANGEACTIVEID,
 } from "./types";
 
 export const setBgCol = (r, g, b) => {
@@ -28,6 +29,13 @@ export const addBoxShadow = () => {
 export const removeBoxShadow = (id) => {
   return {
     type: REMOVEBOXSHADOW,
+    payload: id,
+  };
+};
+
+export const changeActiveId = (id) => {
+  return {
+    type: CHANGEACTIVEID,
     payload: id,
   };
 };
