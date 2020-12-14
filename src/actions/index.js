@@ -8,6 +8,7 @@ import {
   SETOFFSETY,
   SETSPREAD,
   SETBLUR,
+  SETINSET,
 } from "./types";
 
 export const setBgCol = (r, g, b) => {
@@ -69,5 +70,12 @@ export const setBlur = (blur, id) => {
   return {
     type: SETBLUR,
     payload: { blur, id },
+  };
+};
+
+export const setInset = (id) => {
+  return {
+    type: SETINSET,
+    payload: id,
   };
 };

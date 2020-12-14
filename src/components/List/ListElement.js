@@ -9,6 +9,7 @@ import { removeBoxShadow, changeActiveId } from "../../actions";
 const ListElement = ({
   code,
   list,
+  listNum,
   id,
   activeId,
   removeBoxShadow,
@@ -52,7 +53,7 @@ const ListElement = ({
       color={color}
       key={id}
     >
-      {id + 1}
+      {listNum + 1}
       <span>
         <FontAwesomeIcon icon={faWindowClose} onClick={handleRemoveListItem} />
       </span>

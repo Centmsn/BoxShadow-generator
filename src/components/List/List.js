@@ -11,8 +11,25 @@ const List = ({ addBoxShadow, list }) => {
     addBoxShadow();
   };
 
-  const renderList = () =>
-    list.map((el, index) => <ListElement code={el} id={index} list={list} />);
+  const renderList = () => {
+    const boxShadowList = Object.entries(list);
+    const keys = Object.keys(list);
+    const code = [];
+    boxShadowList
+      .flatMap((el) => el[1])
+      .forEach((el) =>
+        code.push(`${el.x}, ${el.y}, ${el.s}, ${el.b}, ${el.c}`)
+      );
+
+    return code.map((el, index) => (
+      <ListElement
+        code={code[index]}
+        id={keys[index]}
+        list={code}
+        listNum={index}
+      />
+    ));
+  };
 
   return (
     <Wrapper>

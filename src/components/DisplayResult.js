@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const DisplayResult = ({ r, g, b, list }) => {
-  return <ExampleBox r={r} g={g} b={b} code={list}></ExampleBox>;
+const DisplayResult = ({ r, g, b, code }) => {
+  return <ExampleBox r={r} g={g} b={b} code={code}></ExampleBox>;
 };
 
 const ExampleBox = styled.div.attrs((props) => ({

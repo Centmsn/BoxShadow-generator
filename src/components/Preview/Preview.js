@@ -28,13 +28,16 @@ const Preview = ({ bg, example, list }) => {
   };
 
   const renderCode = () => {
+    const keys = Object.keys(list);
     let code = "";
 
-    for (let i = 0; i < list.length; i++) {
+    for (let i = 0; i < keys.length; i++) {
+      const { x, y, s, b, c } = list[keys[i]];
+
       if (i === 0) {
-        code += list[i];
+        code += `${x}px ${y}px ${s}px ${b}px ${c}`;
       } else {
-        code += `, ${list[i]}`;
+        code += `, ${x}px ${y}px ${s}px ${b}px ${c}`;
       }
     }
 
@@ -57,7 +60,7 @@ const Preview = ({ bg, example, list }) => {
         r={example.r}
         g={example.g}
         b={example.b}
-        list={renderCode()}
+        code={renderCode()}
       />
     </Wrapper>
   );

@@ -8,3 +8,4 @@ export const SETOFFSETX = "SETOFFSETX";
 export const SETOFFSETY = "SETOFFSETY";
 export const SETSPREAD = "SETSPREAD";
 export const SETBLUR = "SETBLUR";
+export const SETINSET = "SETINSET";
