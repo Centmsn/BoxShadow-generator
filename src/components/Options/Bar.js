@@ -1,9 +1,24 @@
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 
 import Draggable from "./Draggable";
+import { setOffsetX, setOffsetY, setSpread, setBlur } from "../../actions";
 
-const Bar = ({ text, min, max, position, initial, setPosition }) => {
+const Bar = ({
+  text,
+  min,
+  max,
+  index,
+  activeId,
+  position,
+  initial,
+  setPosition,
+  setOffsetX,
+  setOffsetY,
+  setSpread,
+  setBlur,
+}) => {
   const [innerBarWidth, setInnerBarWidth] = useState(0);
   const [barInfo, setBarInfo] = useState(0);
   const bar = useRef(null);
@@ -51,6 +66,32 @@ const Bar = ({ text, min, max, position, initial, setPosition }) => {
     else if (info < min) info = min;
 
     setBarInfo(info);
+    updateBoxShadow(info);
+  };
+
+  const updateBoxShadow = (offset) => {
+    // 1 - offsetX
+    // 2 - offsetY
+    // 3 - spread
+    // 4 - blur
+
+    switch (index) {
+      case 1:
+        setOffsetX(offset, activeId);
+        break;
+
+      case 2:
+        setOffsetY(offset, activeId);
+        break;
+
+      case 3:
+        setSpread(offset, activeId);
+        break;
+
+      case 4:
+        setBlur(offset, activeId);
+        break;
+    }
   };
 
   return (
@@ -110,4 +151,15 @@ const Label = styled.p`
   user-select: none;
 `;
 
-export default Bar;
+const mapStateToProps = (state) => {
+  return {
+    activeId: state.activeId,
+  };
+};
+
+export default connect(mapStateToProps, {
+  setOffsetX,
+  setOffsetY,
+  setSpread,
+  setBlur,
+})(Bar);

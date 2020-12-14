@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -18,6 +19,7 @@ const Options = () => {
         position={positionX}
         initial="center"
         setPosition={setPositionX}
+        index={1}
         min={-50}
         max={50}
       />
@@ -26,6 +28,7 @@ const Options = () => {
         position={positionY}
         initial="center"
         setPosition={setPositionY}
+        index={2}
         min={-50}
         max={50}
       />
@@ -34,6 +37,7 @@ const Options = () => {
         position={positionSpread}
         initial="left"
         setPosition={setPositionSpread}
+        index={3}
         min={0}
         max={50}
       />
@@ -42,6 +46,7 @@ const Options = () => {
         position={positionBlur}
         initial="left"
         setPosition={setPositionBlur}
+        index={4}
         min={0}
         max={50}
       />
@@ -64,4 +69,8 @@ const Wrapper = styled.div`
   padding: 10px;
 `;
 
-export default Options;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+export default connect(mapStateToProps, {})(Options);
