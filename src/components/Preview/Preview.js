@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Gallery from "./Gallery";
 import PreviewSettings from "./PreviewSettings";
-import DisplayResult from "../DisplayResult";
+import DisplayResult from "./DisplayResult";
 
 const Preview = ({ bg, example, list }) => {
   const [settingsVisibility, setSettingsVisibility] = useState(false);
@@ -32,12 +32,12 @@ const Preview = ({ bg, example, list }) => {
     let code = "";
 
     for (let i = 0; i < keys.length; i++) {
-      const { x, y, s, b, c } = list[keys[i]];
+      const { inset, x, y, s, b, c } = list[keys[i]];
 
       if (i === 0) {
-        code += `${x}px ${y}px ${s}px ${b}px ${c}`;
+        code += `${inset ? "inset " : ""}${x}px ${y}px ${b}px ${s}px ${c}`;
       } else {
-        code += `, ${x}px ${y}px ${s}px ${b}px ${c}`;
+        code += `,${inset ? "inset " : ""}${x}px ${y}px ${b}px ${s}px ${c}`;
       }
     }
 

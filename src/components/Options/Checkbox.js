@@ -1,13 +1,26 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
+import { useState, useEffect } from "react";
 
-const Checkbox = ({ text }) => {
+import { setInset } from "../../actions";
+
+const Checkbox = ({ text, list, setInset, activeId }) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (list[activeId].inset) {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  }, [activeId]);
 
   const toggleCheckbox = () => {
     setIsChecked((prev) => !prev);
+
+    setInset(activeId, !isChecked);
   };
 
   const status = isChecked && (
@@ -60,4 +73,11 @@ const Info = styled.p`
   user-select: none;
 `;
 
-export default Checkbox;
+const mapStateToprops = (state) => {
+  return {
+    activeId: state.activeId,
+    list: state.boxShadowList,
+  };
+};
+
+export default connect(mapStateToprops, { setInset })(Checkbox);

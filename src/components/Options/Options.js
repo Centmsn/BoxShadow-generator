@@ -17,7 +17,6 @@ const Options = () => {
       <Bar
         text="Offset X"
         position={positionX}
-        initial="center"
         setPosition={setPositionX}
         index={1}
         min={-50}
@@ -26,7 +25,6 @@ const Options = () => {
       <Bar
         text="Offset Y"
         position={positionY}
-        initial="center"
         setPosition={setPositionY}
         index={2}
         min={-50}
@@ -35,7 +33,6 @@ const Options = () => {
       <Bar
         text="Spread"
         position={positionSpread}
-        initial="left"
         setPosition={setPositionSpread}
         index={3}
         min={0}
@@ -44,7 +41,6 @@ const Options = () => {
       <Bar
         text="Blur"
         position={positionBlur}
-        initial="left"
         setPosition={setPositionBlur}
         index={4}
         min={0}

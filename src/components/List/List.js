@@ -18,13 +18,17 @@ const List = ({ addBoxShadow, list }) => {
     boxShadowList
       .flatMap((el) => el[1])
       .forEach((el) =>
-        code.push(`${el.x}, ${el.y}, ${el.s}, ${el.b}, ${el.c}`)
+        code.push(
+          `${el.inset ? "inset" : null}, ${el.x}, ${el.y}, ${el.s}, ${el.b}, ${
+            el.c
+          }`
+        )
       );
 
     return code.map((el, index) => (
       <ListElement
         code={code[index]}
-        id={keys[index]}
+        id={parseInt(keys[index])}
         list={code}
         listNum={index}
       />

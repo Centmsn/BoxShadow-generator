@@ -1,6 +1,10 @@
+import { connect } from "react-redux";
 import styled from "styled-components";
+import { useEffect } from "react";
 
-const RGBColor = () => {
+import { setShadowColor } from "../../actions";
+
+const RGBColor = ({ list, activeId }) => {
   return (
     <Wrapper>
       <label>
@@ -61,4 +65,11 @@ const ColorInput = styled.input`
   }
 `;
 
-export default RGBColor;
+const mapStateToProps = (state) => {
+  return {
+    activeId: state.activeId,
+    list: state.boxShadowList,
+  };
+};
+
+export default connect(mapStateToProps, { setShadowColor })(RGBColor);

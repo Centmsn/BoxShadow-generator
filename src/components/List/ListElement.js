@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
@@ -10,6 +11,7 @@ const ListElement = ({
   code,
   list,
   listNum,
+  keys,
   id,
   activeId,
   removeBoxShadow,
@@ -28,9 +30,10 @@ const ListElement = ({
         }, 3500);
       return;
     }
-
-    if (activeId >= id) {
-      changeActiveId(activeId === 0 ? 0 : activeId - 1);
+    if (activeId == keys[0] && id == keys[0]) {
+      changeActiveId(parseInt(keys[1]));
+    } else if (activeId == id) {
+      changeActiveId(parseInt(keys[0]));
     }
     removeBoxShadow(id);
   };
@@ -122,6 +125,7 @@ const Error = styled.p`
 const mapStateToProps = (state) => {
   return {
     activeId: state.activeId,
+    keys: Object.keys(state.boxShadowList),
   };
 };
 

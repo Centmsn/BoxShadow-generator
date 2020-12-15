@@ -3,21 +3,28 @@ import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 
 import Draggable from "./Draggable";
-import { setOffsetX, setOffsetY, setSpread, setBlur } from "../../actions";
+import {
+  setOffsetX,
+  setOffsetY,
+  setSpread,
+  setBlur,
+  changeActiveId,
+} from "../../actions";
 
 const Bar = ({
+  list,
   text,
   min,
   max,
   index,
   activeId,
   position,
-  initial,
   setPosition,
   setOffsetX,
   setOffsetY,
   setSpread,
   setBlur,
+  changeActiveId,
 }) => {
   const [innerBarWidth, setInnerBarWidth] = useState(0);
   const [barInfo, setBarInfo] = useState(0);
@@ -25,14 +32,46 @@ const Bar = ({
 
   useEffect(() => {
     const { width } = bar.current.getBoundingClientRect();
+    const range = parseInt(Math.abs(min) + max);
 
-    if (initial === "center") {
-      setPosition(width / 2 - 15);
-      setInnerBarWidth(width / 2 + 5);
-    } else if (initial === "left") {
-      setPosition(-2);
+    if (!list[activeId]) {
+      changeActiveId(Object.keys(list)[0]);
+      return;
     }
-  }, []);
+
+    switch (text) {
+      case "Offset X":
+        const posX =
+          (((width - 30) / range) * (100 + 2 * list[activeId].x)) / 2;
+        setPosition(posX);
+        setInnerBarWidth(posX + 15);
+        setBarInfo(list[activeId].x);
+        break;
+
+      case "Offset Y":
+        const posY =
+          (((width - 30) / range) * (100 + 2 * list[activeId].y)) / 2;
+        setPosition(posY);
+        setInnerBarWidth(posY + 15);
+        setBarInfo(list[activeId].y);
+        break;
+
+      case "Spread":
+        const spread =
+          (((width - 30) / range) * (0 + 2 * list[activeId].s)) / 2;
+        setPosition(spread);
+        setInnerBarWidth(spread + 15);
+        setBarInfo(list[activeId].s);
+        break;
+
+      case "Blur":
+        const blur = (((width - 30) / range) * (0 + 2 * list[activeId].b)) / 2;
+        setPosition(blur);
+        setInnerBarWidth(blur + 15);
+        setBarInfo(list[activeId].b);
+        break;
+    }
+  }, [activeId]);
 
   const handlePositionChange = (e) => {
     const { width, left } = bar.current.getBoundingClientRect();
@@ -137,13 +176,6 @@ const InnerBar = styled.div.attrs((props) => ({
   background-color: ${({ theme }) => theme.lightBlue};
 `;
 
-const BarInfo = styled.p`
-  position: absolute;
-  z-index: 999;
-
-  user-select: none;
-`;
-
 const Label = styled.p`
   flex-basis: 20%;
 
@@ -154,6 +186,7 @@ const Label = styled.p`
 const mapStateToProps = (state) => {
   return {
     activeId: state.activeId,
+    list: state.boxShadowList,
   };
 };
 
@@ -162,4 +195,5 @@ export default connect(mapStateToProps, {
   setOffsetY,
   setSpread,
   setBlur,
+  changeActiveId,
 })(Bar);

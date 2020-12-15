@@ -7,25 +7,26 @@ import {
   SETOFFSETY,
   SETSPREAD,
   SETBLUR,
+  SETINSET,
+  SETSHADOWCOLOR,
 } from "../actions/types";
 
-const INITIAL_STATE = { 0: { x: 0, y: 0, s: 4, b: 4, c: "rgba(0, 0, 0, 1)" } };
+const INITIAL_STATE = {
+  0: { inset: false, x: 0, y: 0, b: 4, s: 4, c: { r: 0, g: 0, b: 0, a: 1 } },
+};
 
 export default (state = INITIAL_STATE, action) => {
-  // const newState = [...state];
-
   switch (action.type) {
     case ADDBOXSHADOW:
-      const keys = Object.keys(state);
-      console.log();
       return {
         ...state,
         [parseInt(_.findLastKey(state)) + 1]: {
+          inset: false,
           x: 0,
           y: 0,
-          s: 4,
           b: 4,
-          c: "rgba(0, 0, 0, 1)",
+          s: 4,
+          c: { r: 0, g: 0, b: 0, a: 1 },
         },
       };
 
@@ -46,19 +47,29 @@ export default (state = INITIAL_STATE, action) => {
         action.payload.offset
       );
 
-    // case SETSPREAD:
-    //   const spread = [...state][action.payload.id].split(" ");
-    //   spread[2] = `${action.payload.spread}px`;
+    case SETSPREAD:
+      return _.set(
+        { ...state },
+        `${action.payload.id}.s`,
+        action.payload.spread
+      );
 
-    //   newState[action.payload.id] = spread.join(" ");
-    //   return newState;
+    case SETBLUR:
+      return _.set({ ...state }, `${action.payload.id}.b`, action.payload.blur);
 
-    // case SETBLUR:
-    //   const blur = [...state][action.payload.id].split(" ");
-    //   blur[3] = `${action.payload.blur}px`;
+    case SETINSET:
+      return _.set(
+        { ...state },
+        `${action.payload.id}.inset`,
+        action.payload.isInset
+      );
 
-    //   newState[action.payload.id] = blur.join(" ");
-    //   return newState;
+    case SETSHADOWCOLOR:
+      return _.set(
+        { ...state },
+        `${action.payload.id}.c`,
+        action.payload.color
+      );
 
     default:
       return state;

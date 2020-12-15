@@ -9,6 +9,7 @@ import {
   SETSPREAD,
   SETBLUR,
   SETINSET,
+  SETSHADOWCOLOR,
 } from "./types";
 
 export const setBgCol = (r, g, b) => {
@@ -73,9 +74,16 @@ export const setBlur = (blur, id) => {
   };
 };
 
-export const setInset = (id) => {
+export const setInset = (id, isInset) => {
   return {
     type: SETINSET,
-    payload: id,
+    payload: { id, isInset },
+  };
+};
+
+export const setShadowColor = (id, color) => {
+  return {
+    type: SETSHADOWCOLOR,
+    payload: { id, color },
   };
 };
