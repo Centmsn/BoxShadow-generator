@@ -2,9 +2,11 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { useState } from "react";
 
-import Gallery from "./Gallery";
-import PreviewSettings from "./PreviewSettings";
 import DisplayResult from "./DisplayResult";
+import Gallery from "./Gallery";
+import { generateCode } from "../../helpers";
+import Info from "./Info";
+import PreviewSettings from "./PreviewSettings";
 
 const Preview = ({ bg, example, list }) => {
   const [settingsVisibility, setSettingsVisibility] = useState(false);
@@ -27,26 +29,6 @@ const Preview = ({ bg, example, list }) => {
     }
   };
 
-  const renderCode = () => {
-    const keys = Object.keys(list);
-    let code = "";
-
-    for (let i = 0; i < keys.length; i++) {
-      const { inset, x, y, s, b, color } = list[keys[i]];
-      if (i === 0) {
-        code += `${inset ? "inset " : ""}${x}px ${y}px ${b}px ${s}px rgba(${
-          color.r
-        }, ${color.g}, ${color.b}, ${color.a})`;
-      } else {
-        code += `,${inset ? "inset " : ""}${x}px ${y}px ${b}px ${s}px rgba(${
-          color.r
-        }, ${color.g}, ${color.b}, ${color.a})`;
-      }
-    }
-
-    return code;
-  };
-
   return (
     <Wrapper r={bg.r} g={bg.g} b={bg.b}>
       <OptionBar>
@@ -58,12 +40,13 @@ const Preview = ({ bg, example, list }) => {
           visibility={settingsVisibility}
           setVisibility={() => toggleVisibility(1)}
         />
+        <Info />
       </OptionBar>
       <DisplayResult
         r={example.r}
         g={example.g}
         b={example.b}
-        code={renderCode()}
+        code={generateCode(list)}
       />
     </Wrapper>
   );

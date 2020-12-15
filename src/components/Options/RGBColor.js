@@ -81,8 +81,8 @@ const Wrapper = styled.div`
   display: flex;
 
   label {
-    flex-basis: 15%;
-    min-width: 35px;
+    flex-basis: 10%;
+    min-width: 40px;
     display: flex;
 
     color: ${({ theme }) => theme.lightGray};

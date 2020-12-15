@@ -45,9 +45,7 @@ const ListElement = ({
     changeActiveId(id);
   };
 
-  // !zmienia kolor wszystkich elementów listy!
   const error = listError && <Error>{listError}</Error>;
-  // const { r, g, b, a } = list[activeId].color;
 
   return (
     <Wrapper
