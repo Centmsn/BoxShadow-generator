@@ -12,7 +12,14 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
-  0: { inset: false, x: 0, y: 0, b: 4, s: 4, c: { r: 0, g: 0, b: 0, a: 1 } },
+  0: {
+    inset: false,
+    x: 0,
+    y: 0,
+    b: 4,
+    s: 4,
+    color: { r: 0, g: 0, b: 0, a: 1 },
+  },
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -26,7 +33,7 @@ export default (state = INITIAL_STATE, action) => {
           y: 0,
           b: 4,
           s: 4,
-          c: { r: 0, g: 0, b: 0, a: 1 },
+          color: { r: 0, g: 0, b: 0, a: 1 },
         },
       };
 
@@ -67,7 +74,7 @@ export default (state = INITIAL_STATE, action) => {
     case SETSHADOWCOLOR:
       return _.set(
         { ...state },
-        `${action.payload.id}.c`,
+        `${action.payload.id}.color`,
         action.payload.color
       );
 

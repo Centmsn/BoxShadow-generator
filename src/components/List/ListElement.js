@@ -8,11 +8,10 @@ import { useRef, useState } from "react";
 import { removeBoxShadow, changeActiveId } from "../../actions";
 
 const ListElement = ({
-  code,
   list,
   listNum,
-  keys,
   id,
+  color,
   activeId,
   removeBoxShadow,
   changeActiveId,
@@ -21,7 +20,8 @@ const ListElement = ({
   const listItem = useRef(null);
 
   const handleRemoveListItem = () => {
-    if (list.length - 1 === 0) {
+    const keys = Object.keys(list);
+    if (keys.length - 1 === 0) {
       setListError("You can't remove last element");
 
       if (!listError)
@@ -45,8 +45,9 @@ const ListElement = ({
     changeActiveId(id);
   };
 
+  // !zmienia kolor wszystkich elementów listy!
   const error = listError && <Error>{listError}</Error>;
-  const color = code.slice(code.match(/rgba/).index);
+  // const { r, g, b, a } = list[activeId].color;
 
   return (
     <Wrapper
@@ -125,7 +126,7 @@ const Error = styled.p`
 const mapStateToProps = (state) => {
   return {
     activeId: state.activeId,
-    keys: Object.keys(state.boxShadowList),
+    list: state.boxShadowList,
   };
 };
 

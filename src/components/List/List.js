@@ -19,20 +19,24 @@ const List = ({ addBoxShadow, list }) => {
       .flatMap((el) => el[1])
       .forEach((el) =>
         code.push(
-          `${el.inset ? "inset" : null}, ${el.x}, ${el.y}, ${el.s}, ${el.b}, ${
-            el.c
-          }`
+          `${el.inset ? "inset" : null}, ${el.x}, ${el.y}, ${el.s}, ${
+            el.b
+          }, rgba(${el.color.r}, ${el.color.g}, ${el.color.b}, ${el.color.a})`
         )
       );
 
-    return code.map((el, index) => (
-      <ListElement
-        code={code[index]}
-        id={parseInt(keys[index])}
-        list={code}
-        listNum={index}
-      />
-    ));
+    return code.map((el, index) => {
+      const color = code[index].slice(code[index].match(/rgba/).index);
+
+      return (
+        <ListElement
+          id={parseInt(keys[index])}
+          list={code}
+          listNum={index}
+          color={color}
+        />
+      );
+    });
   };
 
   return (

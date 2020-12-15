@@ -4,27 +4,72 @@ import { useEffect } from "react";
 
 import { setShadowColor } from "../../actions";
 
-const RGBColor = ({ list, activeId }) => {
+const RGBColor = ({ list, activeId, setShadowColor }) => {
+  const handleShadowColorChange = (e, id) => {
+    // 1 - R
+    // 2 - G
+    // 3 - B
+    // 4 - A
+    const { r, g, b, a } = list[activeId].color;
+    let color;
+
+    switch (id) {
+      case 1:
+        color = { r: e.target.value, g, b, a };
+        break;
+
+      case 2:
+        color = { r, g: e.target.value, b, a };
+        break;
+
+      case 3:
+        color = { r, g, b: e.target.value, a };
+        break;
+
+      case 4:
+        color = { r, g, b, a: e.target.value };
+        break;
+    }
+
+    setShadowColor(activeId, color);
+  };
+
   return (
     <Wrapper>
       <label>
         R
-        <ColorInput type="number" />
+        <ColorInput
+          type="number"
+          value={list[activeId].color.r}
+          onChange={(e) => handleShadowColorChange(e, 1)}
+        />
       </label>
 
       <label>
         G
-        <ColorInput type="number" />
+        <ColorInput
+          type="number"
+          value={list[activeId].color.g}
+          onChange={(e) => handleShadowColorChange(e, 2)}
+        />
       </label>
 
       <label>
         B
-        <ColorInput type="number" />
+        <ColorInput
+          type="number"
+          value={list[activeId].color.b}
+          onChange={(e) => handleShadowColorChange(e, 3)}
+        />
       </label>
 
       <label>
         A
-        <ColorInput type="number" />
+        <ColorInput
+          type="number"
+          value={list[activeId].color.a}
+          onChange={(e) => handleShadowColorChange(e, 4)}
+        />
       </label>
     </Wrapper>
   );
