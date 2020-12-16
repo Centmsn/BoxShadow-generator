@@ -32,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
 const theme = {
   font: "'Baloo 2', cursive",
   darkBlue: "rgb(0, 32, 84)",
-  darkBlueTransparent: "rgb(0, 32, 84, 0.8)",
+  darkBlueTransparent: "rgb(0, 32, 84, 0.9)",
   lightBlue: "rgb(175, 193, 222)",
   lightGray: "rgb(160, 160, 160)",
   border: "4px solid rgb(0, 32, 84)",

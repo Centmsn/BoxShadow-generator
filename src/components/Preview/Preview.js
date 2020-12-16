@@ -11,21 +11,29 @@ import PreviewSettings from "./PreviewSettings";
 const Preview = ({ bg, example, list }) => {
   const [settingsVisibility, setSettingsVisibility] = useState(false);
   const [galleryVisibility, setGalleryVisibility] = useState(false);
+  const [infoVisibility, setInfoVisibility] = useState(false);
 
   const toggleVisibility = (id) => {
     // 0 - gallery is visible
     // 1 - settings are visible
+    // 2 - info is visible
 
     if (id === 0) {
       setSettingsVisibility(false);
+      setInfoVisibility(false);
       galleryVisibility
         ? setGalleryVisibility(false)
         : setGalleryVisibility(true);
-    } else {
+    } else if (id === 1) {
       setGalleryVisibility(false);
+      setInfoVisibility(false);
       settingsVisibility
         ? setSettingsVisibility(false)
         : setSettingsVisibility(true);
+    } else {
+      setSettingsVisibility(false);
+      setGalleryVisibility(false);
+      infoVisibility ? setInfoVisibility(false) : setInfoVisibility(true);
     }
   };
 
@@ -40,7 +48,10 @@ const Preview = ({ bg, example, list }) => {
           visibility={settingsVisibility}
           setVisibility={() => toggleVisibility(1)}
         />
-        <Info />
+        <Info
+          visibility={infoVisibility}
+          setVisibility={() => toggleVisibility(2)}
+        />
       </OptionBar>
       <DisplayResult
         r={example.r}
@@ -76,6 +87,9 @@ const OptionBar = styled.div`
 
   border-bottom: ${({ theme }) => theme.border};
   font-size: 3rem;
+
+  padding-top: 5px;
+  padding-right: 5px;
 `;
 
 const mapStateToProps = (state) => {
