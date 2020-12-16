@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useRef, useState } from "react";
 
@@ -57,7 +57,7 @@ const ListElement = ({
     >
       {listNum + 1}
       <span>
-        <FontAwesomeIcon icon={faWindowClose} onClick={handleRemoveListItem} />
+        <FontAwesomeIcon icon={faMinusSquare} onClick={handleRemoveListItem} />
       </span>
 
       {error}
@@ -101,10 +101,27 @@ const Wrapper = styled.div`
   }
 
   span {
+    line-height: 2rem;
     color: ${({ theme }) => theme.lightBlue};
+
+    &::after {
+      content: "remove shadow";
+      position: absolute;
+      right: 50%;
+
+      transform: translateX(50%);
+
+      font-size: 1.25rem;
+
+      opacity: 0;
+      transition: 200ms;
+    }
 
     &:hover {
       color: ${({ theme }) => theme.darkBlue};
+      &::after {
+        opacity: 1;
+      }
     }
   }
 `;

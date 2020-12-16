@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { useEffect } from "react";
 
 import { setShadowColor } from "../../actions";
 
@@ -11,23 +10,35 @@ const RGBColor = ({ list, activeId, setShadowColor }) => {
     // 3 - B
     // 4 - A
     const { r, g, b, a } = list[activeId].color;
+    const limit = id === 4 ? 100 : 255;
+    let val = e.target.value;
     let color;
+
+    if (!val) {
+      val = 0;
+    } else if (val > limit) {
+      val = limit;
+    } else if (val.match(/^0{2,}/)) {
+      val = val.slice(0, 1);
+    } else if (val.match(/^0\d/)) {
+      val = val.slice(1);
+    }
 
     switch (id) {
       case 1:
-        color = { r: e.target.value, g, b, a };
+        color = { r: val, g, b, a };
         break;
 
       case 2:
-        color = { r, g: e.target.value, b, a };
+        color = { r, g: val, b, a };
         break;
 
       case 3:
-        color = { r, g, b: e.target.value, a };
+        color = { r, g, b: val, a };
         break;
 
       case 4:
-        color = { r, g, b, a: e.target.value };
+        color = { r, g, b, a: val / 100 };
         break;
     }
 
@@ -36,6 +47,7 @@ const RGBColor = ({ list, activeId, setShadowColor }) => {
 
   return (
     <Wrapper>
+      <p>SHADOW COLOR</p>
       <label>
         R
         <ColorInput
@@ -44,7 +56,6 @@ const RGBColor = ({ list, activeId, setShadowColor }) => {
           onChange={(e) => handleShadowColorChange(e, 1)}
         />
       </label>
-
       <label>
         G
         <ColorInput
@@ -53,7 +64,6 @@ const RGBColor = ({ list, activeId, setShadowColor }) => {
           onChange={(e) => handleShadowColorChange(e, 2)}
         />
       </label>
-
       <label>
         B
         <ColorInput
@@ -62,12 +72,11 @@ const RGBColor = ({ list, activeId, setShadowColor }) => {
           onChange={(e) => handleShadowColorChange(e, 3)}
         />
       </label>
-
       <label>
         A
         <ColorInput
           type="number"
-          value={list[activeId].color.a}
+          value={Math.floor(list[activeId].color.a * 100)}
           onChange={(e) => handleShadowColorChange(e, 4)}
         />
       </label>
@@ -76,7 +85,7 @@ const RGBColor = ({ list, activeId, setShadowColor }) => {
 };
 
 const Wrapper = styled.div`
-  flex-basis: 60%;
+  flex-basis: 80%;
 
   display: flex;
 
@@ -85,7 +94,11 @@ const Wrapper = styled.div`
     min-width: 40px;
     display: flex;
 
-    color: ${({ theme }) => theme.lightGray};
+    color: rgb(235, 235, 235);
+  }
+
+  p {
+    margin-right: 15px;
   }
 `;
 
@@ -97,6 +110,8 @@ const ColorInput = styled.input`
   border-bottom: 2px solid ${({ theme }) => theme.darkBlue};
   border-right: none;
   outline: none;
+
+  background: none;
 
   font-family: ${({ theme }) => theme.font};
   font-size: 1rem;

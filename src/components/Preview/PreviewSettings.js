@@ -39,7 +39,7 @@ const PreviewSettings = ({
         }, 3500);
       }
     } else if (val.match(/^0{2,}/)) {
-      val = 0;
+      val = val.slice(0, 1);
     } else if (val.match(/^0\d/)) {
       val = val.slice(1);
     }
@@ -118,7 +118,7 @@ const PreviewSettings = ({
             <ColorInput
               value={example.r}
               onChange={(e) => handleBoxColorChange(e, 1, "box")}
-              maxLength={3}
+              type="number"
               error={
                 colorError.type === "box" && colorError.index === 1
                   ? true
@@ -132,7 +132,7 @@ const PreviewSettings = ({
             <ColorInput
               value={example.g}
               onChange={(e) => handleBoxColorChange(e, 2, "box")}
-              maxLength={3}
+              type="number"
               error={
                 colorError.type === "box" && colorError.index === 2
                   ? true
@@ -146,7 +146,7 @@ const PreviewSettings = ({
             <ColorInput
               value={example.b}
               onChange={(e) => handleBoxColorChange(e, 3, "box")}
-              maxLength={3}
+              type="number"
               error={
                 colorError.type === "box" && colorError.index === 3
                   ? true
@@ -165,7 +165,7 @@ const PreviewSettings = ({
             <ColorInput
               value={bg.r}
               onChange={(e) => handleBoxColorChange(e, 1, "bg")}
-              maxLength={3}
+              type="number"
               error={
                 colorError.type === "bg" && colorError.index === 1
                   ? true
@@ -179,7 +179,7 @@ const PreviewSettings = ({
             <ColorInput
               value={bg.g}
               onChange={(e) => handleBoxColorChange(e, 2, "bg")}
-              maxLength={3}
+              type="number"
               error={
                 colorError.type === "bg" && colorError.index === 2
                   ? true
@@ -193,7 +193,7 @@ const PreviewSettings = ({
             <ColorInput
               value={bg.b}
               onChange={(e) => handleBoxColorChange(e, 3, "bg")}
-              maxLength={3}
+              type="number"
               error={
                 colorError.type === "bg" && colorError.index === 3
                   ? true
@@ -246,6 +246,12 @@ const ColorInput = styled.input`
   font-family: ${({ theme }) => theme.font};
   font-size: 1.1rem;
   color: white;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const Section = styled.section`

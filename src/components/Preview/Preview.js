@@ -68,10 +68,14 @@ const Wrapper = styled.div`
 const OptionBar = styled.div`
   flex-basis: 100%;
   justify-content: flex-end;
-  height: 15%;
+  height: 12%;
+  min-height: 70px;
+  max-height: 100px;
 
-  font-size: 3rem;
   display: flex;
+
+  border-bottom: ${({ theme }) => theme.border};
+  font-size: 3rem;
 `;
 
 const mapStateToProps = (state) => {

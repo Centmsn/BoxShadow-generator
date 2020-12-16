@@ -46,8 +46,10 @@ const Options = () => {
         min={0}
         max={50}
       />
-      <RGBColor />
-      <Checkbox text="Inset" />
+      <SubContainer>
+        <RGBColor />
+        <Checkbox text="Inset" />
+      </SubContainer>
     </Wrapper>
   );
 };
@@ -63,6 +65,17 @@ const Wrapper = styled.div`
   font-family: ${({ theme }) => theme.font};
 
   padding: 10px;
+`;
+
+const SubContainer = styled.div`
+  flex-basis: 100%;
+
+  display: flex;
+
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.lightBlue};
+
+  padding: 5px;
 `;
 
 const mapStateToProps = (state) => {

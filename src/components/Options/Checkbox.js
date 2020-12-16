@@ -23,9 +23,7 @@ const Checkbox = ({ text, list, setInset, activeId }) => {
     setInset(activeId, !isChecked);
   };
 
-  const status = isChecked && (
-    <FontAwesomeIcon icon={faCheck} style={{ color: "white" }} />
-  );
+  const status = isChecked && <FontAwesomeIcon icon={faCheck} />;
 
   return (
     <Wrapper>
@@ -38,7 +36,7 @@ const Checkbox = ({ text, list, setInset, activeId }) => {
 };
 
 const Wrapper = styled.div`
-  flex-basis: 30%;
+  flex-basis: 20%;
 
   display: flex;
   justify-content: right;
@@ -59,12 +57,13 @@ const Box = styled.div`
 
   background-color: ${(props) =>
     props.isChecked ? props.theme.lightBlue : "none"};
+  color: ${({ theme }) => theme.darkBlue};
 
   padding: 3px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.lightBlue};
+    background-color: white;
   }
 `;
 
