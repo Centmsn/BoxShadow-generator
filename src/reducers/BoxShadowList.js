@@ -22,7 +22,7 @@ const INITIAL_STATE = {
   },
 };
 
-export default (state = INITIAL_STATE, action) => {
+const boxShadowList = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADDBOXSHADOW:
       return {
@@ -82,3 +82,5 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+export default boxShadowList;

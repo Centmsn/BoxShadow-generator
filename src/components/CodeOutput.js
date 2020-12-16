@@ -1,4 +1,4 @@
-import { connect, useEffect } from "react-redux";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
 import { generateCode } from "../helpers";

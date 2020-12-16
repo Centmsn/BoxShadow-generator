@@ -2,7 +2,7 @@ import { CHANGEACTIVEID } from "../actions/types";
 
 const INITIAL_STATE = 0;
 
-export default (state = INITIAL_STATE, action) => {
+const ActiveId = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CHANGEACTIVEID:
       return action.payload;
@@ -10,3 +10,5 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+export default ActiveId;

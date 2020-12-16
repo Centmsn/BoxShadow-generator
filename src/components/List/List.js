@@ -34,6 +34,7 @@ const List = ({ addBoxShadow, list }) => {
           list={code}
           listNum={index}
           color={color}
+          key={index}
         />
       );
     });

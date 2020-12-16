@@ -218,16 +218,16 @@ const PreviewSettings = ({
 
 const Nav = styled.div.attrs((props) => ({
   style: {
-    color: props.active ? props.theme.darkBlue : null,
+    color: props.active ? props.theme.lightBlue : null,
   },
 }))`
-  color: ${({ theme }) => theme.lightBlue};
+  color: white;
 
   cursor: pointer;
   transition: 300ms;
 
   &:hover {
-    color: ${({ theme }) => theme.darkBlue};
+    color: ${({ theme }) => theme.lightBlue};
   }
 `;
 

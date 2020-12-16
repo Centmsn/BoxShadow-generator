@@ -78,15 +78,16 @@ const Wrapper = styled.div`
 
 const OptionBar = styled.div`
   flex-basis: 100%;
-  justify-content: flex-end;
-  height: 12%;
-  min-height: 70px;
-  max-height: 100px;
+  height: 60px;
 
   display: flex;
+  justify-content: flex-end;
 
   border-bottom: ${({ theme }) => theme.border};
+  border-radius: 5px;
   font-size: 3rem;
+
+  background-color: ${({ theme }) => theme.darkBlue};
 
   padding-top: 5px;
   padding-right: 5px;

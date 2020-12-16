@@ -7,9 +7,9 @@ import Container from "./Container";
 const Info = ({ visibility, setVisibility }) => {
   return (
     <>
-      <Wrapper>
+      <Nav active={visibility}>
         <FontAwesomeIcon icon={faInfoCircle} onClick={setVisibility} />
-      </Wrapper>
+      </Nav>
 
       <Container visible={visibility}>
         <Section>
@@ -44,15 +44,19 @@ const Info = ({ visibility, setVisibility }) => {
   );
 };
 
-const Wrapper = styled.div`
+const Nav = styled.div.attrs((props) => ({
+  style: {
+    color: props.active ? props.theme.lightBlue : null,
+  },
+}))`
   margin-left: 15px;
-  color: ${({ theme }) => theme.lightBlue};
+  color: white;
 
   cursor: pointer;
 
   &:hover {
     margin-left: 15px;
-    color: ${({ theme }) => theme.darkBlue};
+    color: ${({ theme }) => theme.lightBlue};
   }
 `;
 

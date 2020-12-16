@@ -75,7 +75,10 @@ const Wrapper = styled.div`
   align-items: center;
 
   border-radius: 5px;
-  box-shadow: 0 0 0 2px white, 0 0 0 4px ${({ theme }) => theme.lightBlue},
+  box-shadow: 0 0 0 2px white,
+    0 0 0 4px
+      ${(props) =>
+        props.active ? props.theme.darkBlue : props.theme.lightBlue},
     0 0 0 6px
       ${(props) => (props.active ? props.theme.darkBlue : "transparent")};
 
@@ -91,10 +94,7 @@ const Wrapper = styled.div`
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 0 0 2px white,
-      0 0 0 4px
-        ${(props) =>
-          props.active ? props.theme.lightBlue : props.theme.darkBlue},
+    box-shadow: 0 0 0 2px white, 0 0 0 4px ${(props) => props.theme.darkBlue},
       0 0 0 6px
         ${(props) =>
           props.active ? props.theme.darkBlue : props.theme.lightBlue};
@@ -111,9 +111,17 @@ const Wrapper = styled.div`
 
       transform: translateX(50%);
 
+      border-radius: 5px;
+
       font-size: 1.25rem;
+      -webkit-text-stroke-width: 0px;
+
+      color: white;
+      background-color: ${({ theme }) => theme.lightBlue};
 
       opacity: 0;
+      display: none;
+      padding: 0 5px;
       transition: 200ms;
     }
 
@@ -121,6 +129,7 @@ const Wrapper = styled.div`
       color: ${({ theme }) => theme.darkBlue};
       &::after {
         opacity: 1;
+        display: inline;
       }
     }
   }
