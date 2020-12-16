@@ -42,7 +42,7 @@ const Bar = ({
     switch (text) {
       case "Offset X":
         const posX =
-          (((width - 30) / range) * (100 + 2 * list[activeId].x)) / 2;
+          ((width / range) * (range + 2 * list[activeId].x)) / 2 - 15;
         setPosition(posX);
         setInnerBarWidth(posX + 15);
         setBarInfo(list[activeId].x);
@@ -50,22 +50,21 @@ const Bar = ({
 
       case "Offset Y":
         const posY =
-          (((width - 30) / range) * (100 + 2 * list[activeId].y)) / 2;
+          ((width / range) * (range + 2 * list[activeId].y)) / 2 - 15;
         setPosition(posY);
         setInnerBarWidth(posY + 15);
         setBarInfo(list[activeId].y);
         break;
 
       case "Spread":
-        const spread =
-          (((width - 30) / range) * (0 + 2 * list[activeId].s)) / 2;
+        const spread = (width / range) * list[activeId].s - 15;
         setPosition(spread);
         setInnerBarWidth(spread + 15);
         setBarInfo(list[activeId].s);
         break;
 
       case "Blur":
-        const blur = (((width - 30) / range) * (0 + 2 * list[activeId].b)) / 2;
+        const blur = (width / range) * list[activeId].b - 15;
         setPosition(blur);
         setInnerBarWidth(blur + 15);
         setBarInfo(list[activeId].b);
@@ -90,15 +89,15 @@ const Bar = ({
   };
 
   const updateBarInfo = (width, left, e) => {
-    const base = (Math.abs(min) + max) / width;
+    const base = (Math.abs(min) + max) / (width - 15);
     let info;
 
     if (min === 0) {
       info = Math.floor((e.clientX - left) * base);
     } else {
-      const middle = width / 2 - 15;
+      const middle = width / 2;
 
-      info = Math.floor((e.clientX - middle) * base) - 41;
+      info = Math.floor((e.clientX - left - middle) * base);
     }
 
     if (info > max) info = max;

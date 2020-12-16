@@ -226,8 +226,27 @@ const Nav = styled.div.attrs((props) => ({
   cursor: pointer;
   transition: 300ms;
 
+  &::before {
+    content: "Options";
+    position: absolute;
+
+    left: 5px;
+    top: 5px;
+
+    font-family: ${({ theme }) => theme.font};
+    font-size: 2rem;
+
+    color: ${({ theme }) => theme.lightGray};
+    opacity: 0;
+    visibility: hidden;
+  }
+
   &:hover {
     color: ${({ theme }) => theme.lightBlue};
+    &::before {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 `;
 

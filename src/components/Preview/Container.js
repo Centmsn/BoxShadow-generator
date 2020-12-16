@@ -29,6 +29,7 @@ const Wrapper = styled.div.attrs((props) => ({
   color: white;
 
   transition: 300ms;
+  overflow-y: auto;
 `;
 
 export default Container;

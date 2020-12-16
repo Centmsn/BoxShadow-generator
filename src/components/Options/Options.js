@@ -19,16 +19,16 @@ const Options = () => {
         position={positionX}
         setPosition={setPositionX}
         index={1}
-        min={-50}
-        max={50}
+        min={-100}
+        max={100}
       />
       <Bar
         text="Offset Y"
         position={positionY}
         setPosition={setPositionY}
         index={2}
-        min={-50}
-        max={50}
+        min={-100}
+        max={100}
       />
       <Bar
         text="Spread"
@@ -36,7 +36,7 @@ const Options = () => {
         setPosition={setPositionSpread}
         index={3}
         min={0}
-        max={50}
+        max={100}
       />
       <Bar
         text="Blur"
@@ -44,7 +44,7 @@ const Options = () => {
         setPosition={setPositionBlur}
         index={4}
         min={0}
-        max={50}
+        max={100}
       />
       <SubContainer>
         <RGBColor />
