@@ -65,7 +65,11 @@ const ListElement = ({
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs((props) => ({
+  style: {
+    backgroundColor: props.color,
+  },
+}))`
   position: relative;
   width: 95%;
   margin: 0 auto 15px auto;
@@ -85,8 +89,6 @@ const Wrapper = styled.div`
   font-size: 2rem;
   -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: white;
-
-  background-color: ${(props) => props.color};
 
   padding: 0 5px;
 
