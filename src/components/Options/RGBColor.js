@@ -1,12 +1,20 @@
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { convertHexToRgb } from "../../helpers";
+import { convertHexToRgb, convertRgbToHex } from "../../helpers";
 import { setShadowColor } from "../../actions";
 
-const RGBColor = ({ activeId, setShadowColor }) => {
+const RGBColor = ({ list, activeId, setShadowColor }) => {
   const [thorttle, setThrottle] = useState(true);
+  const [hexColor, setHexColor] = useState(null);
+
+  useEffect(() => {
+    const { r, g, b } = list[activeId].color;
+    const hex = convertRgbToHex(r, g, b);
+
+    setHexColor(hex);
+  }, [activeId]);
 
   const handleColorChange = (e) => {
     if (!thorttle) {
@@ -17,6 +25,7 @@ const RGBColor = ({ activeId, setShadowColor }) => {
 
     const color = convertHexToRgb(e.target.value);
     setShadowColor(activeId, color);
+    setHexColor(e.target.value);
     setTimeout(() => {
       setThrottle(true);
     }, 50);
@@ -25,7 +34,7 @@ const RGBColor = ({ activeId, setShadowColor }) => {
   return (
     <Wrapper>
       <p>SHADOW COLOR</p>
-      <ColorInput type="color" onChange={handleColorChange} />
+      <ColorInput type="color" onChange={handleColorChange} value={hexColor} />
     </Wrapper>
   );
 };
@@ -62,6 +71,7 @@ const ColorInput = styled.input`
 const mapStateToProps = (state) => {
   return {
     activeId: state.activeId,
+    list: state.boxShadowList,
   };
 };
 

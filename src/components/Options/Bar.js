@@ -8,6 +8,7 @@ import {
   setOffsetY,
   setSpread,
   setBlur,
+  setShadowColor,
   changeActiveId,
 } from "../../actions";
 
@@ -24,6 +25,7 @@ const Bar = ({
   setOffsetY,
   setSpread,
   setBlur,
+  setShadowColor,
   changeActiveId,
 }) => {
   const [innerBarWidth, setInnerBarWidth] = useState(0);
@@ -69,6 +71,12 @@ const Bar = ({
         setInnerBarWidth(blur + 15);
         setBarInfo(list[activeId].b);
         break;
+
+      case "Opacity":
+        const opacity = (width / range) * (list[activeId].color.a * 100) - 30;
+        setPosition(opacity);
+        setInnerBarWidth(opacity + 15);
+        setBarInfo(list[activeId].color.a * 100);
     }
   }, [activeId]);
 
@@ -112,6 +120,7 @@ const Bar = ({
     // 2 - offsetY
     // 3 - spread
     // 4 - blur
+    // 5 - opacity
 
     switch (index) {
       case 1:
@@ -129,6 +138,10 @@ const Bar = ({
       case 4:
         setBlur(offset, activeId);
         break;
+
+      case 5:
+        const { r, g, b } = list[activeId].color;
+        setShadowColor(activeId, { r, g, b, a: offset / 100 });
     }
   };
 
@@ -194,5 +207,6 @@ export default connect(mapStateToProps, {
   setOffsetY,
   setSpread,
   setBlur,
+  setShadowColor,
   changeActiveId,
 })(Bar);

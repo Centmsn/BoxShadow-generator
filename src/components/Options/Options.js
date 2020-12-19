@@ -1,4 +1,3 @@
-import { connect } from "react-redux";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -11,6 +10,7 @@ const Options = () => {
   const [positionY, setPositionY] = useState(0);
   const [positionSpread, setPositionSpread] = useState(0);
   const [positionBlur, setPositionBlur] = useState(0);
+  const [positionOpacity, setPositionOpacity] = useState(10);
 
   return (
     <Wrapper>
@@ -22,6 +22,7 @@ const Options = () => {
         min={-100}
         max={100}
       />
+
       <Bar
         text="Offset Y"
         position={positionY}
@@ -30,6 +31,7 @@ const Options = () => {
         min={-100}
         max={100}
       />
+
       <Bar
         text="Spread"
         position={positionSpread}
@@ -38,6 +40,7 @@ const Options = () => {
         min={0}
         max={100}
       />
+
       <Bar
         text="Blur"
         position={positionBlur}
@@ -46,6 +49,16 @@ const Options = () => {
         min={0}
         max={100}
       />
+
+      <Bar
+        text="Opacity"
+        position={positionOpacity}
+        setPosition={setPositionOpacity}
+        index={5}
+        min={0}
+        max={100}
+      />
+
       <SubContainer>
         <RGBColor />
         <Checkbox text="Inset" />
@@ -78,8 +91,4 @@ const SubContainer = styled.div`
   padding: 5px;
 `;
 
-const mapStateToProps = (state) => {
-  return {};
-};
-
-export default connect(mapStateToProps, {})(Options);
+export default Options;
