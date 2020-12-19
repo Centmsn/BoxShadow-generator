@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useState } from "react";
 
-import Container from "./Container";
+import Container from "../Container";
 import { setBgCol, setBoxCol } from "../../actions";
 
 const PreviewSettings = ({

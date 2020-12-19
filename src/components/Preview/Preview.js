@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import DisplayResult from "./DisplayResult";
-import Gallery from "./Gallery";
+import Gallery from "../Gallery/Gallery";
 import { generateCode } from "../../helpers";
 import Info from "./Info";
 import PreviewSettings from "./PreviewSettings";

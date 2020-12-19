@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const GalleryCard = ({ preset }) => {
+const GalleryCard = ({ preset, position }) => {
   return (
     <Card>
-      <PresetDisplay preset={preset} />
+      <PresetDisplay preset={preset} position={position} />
     </Card>
   );
 };
@@ -29,27 +29,25 @@ const Card = styled.div`
     z-index: 999;
     position: absolute;
 
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform: scale(0);
+    top: -10%;
 
     border-radius: 5px;
 
-    font-size: 2rem;
+    text-align: center;
+    font-size: 1.25rem;
 
     color: ${({ theme }) => theme.darkBlue};
-    background-color: rgba(200, 200, 200, 0.75);
+    background-color: ${({ theme }) => theme.lightBlue};
 
     opacity: 0;
     visibility: hidden;
     transition: 300ms;
+    overflow: hidden;
+    padding: 0 5px;
   }
 
   &:hover {
     &::before {
-      transform: scale(1);
       opacity: 1;
       visibility: visible;
     }
@@ -60,7 +58,8 @@ const PresetDisplay = styled.div`
   width: 100px;
   height: 100px;
 
-  transform: translate(-25%, -25%);
+  transform: ${(props) =>
+    props.position === "center" ? "translate(0)" : "translate(-25%, -25%)"};
 
   background-color: ${({ theme }) => theme.lightBlue};
   box-shadow: ${(props) => props.preset};

@@ -61,11 +61,17 @@ const ColorInput = styled.input`
   width: 25%;
 
   border: none;
+  border-radius: 5px;
   outline: none;
 
   background: none;
-
+  padding: 0 2px;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 0 1px black;
+    /* background-color: white; */
+  }
 `;
 
 const mapStateToProps = (state) => {

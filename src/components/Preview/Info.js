@@ -2,7 +2,7 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-import Container from "./Container";
+import Container from "../Container";
 
 const Info = ({ visibility, setVisibility }) => {
   return (
