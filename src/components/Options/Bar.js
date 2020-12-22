@@ -19,8 +19,6 @@ const Bar = ({
   max,
   index,
   activeId,
-  position,
-  setPosition,
   setOffsetX,
   setOffsetY,
   setSpread,
@@ -28,11 +26,17 @@ const Bar = ({
   setShadowColor,
   changeActiveId,
 }) => {
+  const [sliderPosition, setSliderPosition] = useState(0);
   const [innerBarWidth, setInnerBarWidth] = useState(0);
   const [barInfo, setBarInfo] = useState(0);
   const bar = useRef(null);
 
   useEffect(() => {
+    // 1 - offsetX
+    // 2 - offsetY
+    // 3 - spread
+    // 4 - blur
+    // 5 - opacity
     const { width } = bar.current.getBoundingClientRect();
     const range = parseInt(Math.abs(min) + max);
 
@@ -41,40 +45,40 @@ const Bar = ({
       return;
     }
 
-    switch (text) {
-      case "Offset X":
+    switch (index) {
+      case 1:
         const posX =
           ((width / range) * (range + 2 * list[activeId].x)) / 2 - 15;
-        setPosition(posX);
+        setSliderPosition(posX);
         setInnerBarWidth(posX + 15);
         setBarInfo(list[activeId].x);
         break;
 
-      case "Offset Y":
+      case 2:
         const posY =
           ((width / range) * (range + 2 * list[activeId].y)) / 2 - 15;
-        setPosition(posY);
+        setSliderPosition(posY);
         setInnerBarWidth(posY + 15);
         setBarInfo(list[activeId].y);
         break;
 
-      case "Spread":
+      case 3:
         const spread = (width / range) * list[activeId].s - 15;
-        setPosition(spread);
+        setSliderPosition(spread);
         setInnerBarWidth(spread + 15);
         setBarInfo(list[activeId].s);
         break;
 
-      case "Blur":
+      case 4:
         const blur = (width / range) * list[activeId].b - 15;
-        setPosition(blur);
+        setSliderPosition(blur);
         setInnerBarWidth(blur + 15);
         setBarInfo(list[activeId].b);
         break;
 
-      case "Opacity":
+      case 5:
         const opacity = (width / range) * (list[activeId].color.a * 100) - 30;
-        setPosition(opacity);
+        setSliderPosition(opacity);
         setInnerBarWidth(opacity + 15);
         setBarInfo(list[activeId].color.a * 100);
     }
@@ -90,7 +94,7 @@ const Bar = ({
     } else if (positionX < -2) {
       positionX = -2;
     }
-    setPosition(positionX);
+    setSliderPosition(positionX);
     setInnerBarWidth(positionX + 5);
 
     updateBarInfo(width, left, e);
@@ -151,7 +155,7 @@ const Bar = ({
       <OptionBar ref={bar}>
         <InnerBar width={innerBarWidth} />
         <Draggable
-          position={position}
+          position={sliderPosition}
           setPosition={handlePositionChange}
           text={barInfo}
         />

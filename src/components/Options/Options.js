@@ -1,64 +1,29 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 import Bar from "./Bar";
 import Checkbox from "./Checkbox";
 import RGBColor from "./RGBColor";
 
+const bars = [
+  { prop: "offset x", min: -100, max: 100 },
+  { prop: "offset y", min: -100, max: 100 },
+  { prop: "spread", min: 0, max: 100 },
+  { prop: "blur", min: 0, max: 100 },
+  { prop: "opacity", min: 0, max: 100 },
+];
+
 const Options = () => {
-  const [positionX, setPositionX] = useState(0);
-  const [positionY, setPositionY] = useState(0);
-  const [positionSpread, setPositionSpread] = useState(0);
-  const [positionBlur, setPositionBlur] = useState(0);
-  const [positionOpacity, setPositionOpacity] = useState(10);
+  const renderBars = () => {
+    return bars.map((el, index) => {
+      const { prop, min, max } = el;
+
+      return <Bar text={prop} index={index + 1} min={min} max={max} />;
+    });
+  };
 
   return (
     <Wrapper>
-      <Bar
-        text="Offset X"
-        position={positionX}
-        setPosition={setPositionX}
-        index={1}
-        min={-100}
-        max={100}
-      />
-
-      <Bar
-        text="Offset Y"
-        position={positionY}
-        setPosition={setPositionY}
-        index={2}
-        min={-100}
-        max={100}
-      />
-
-      <Bar
-        text="Spread"
-        position={positionSpread}
-        setPosition={setPositionSpread}
-        index={3}
-        min={0}
-        max={100}
-      />
-
-      <Bar
-        text="Blur"
-        position={positionBlur}
-        setPosition={setPositionBlur}
-        index={4}
-        min={0}
-        max={100}
-      />
-
-      <Bar
-        text="Opacity"
-        position={positionOpacity}
-        setPosition={setPositionOpacity}
-        index={5}
-        min={0}
-        max={100}
-      />
-
+      {renderBars()}
       <SubContainer>
         <RGBColor />
         <Checkbox text="Inset" />
@@ -74,6 +39,9 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+
+  border: ${({ theme }) => theme.border};
+  border-radius: 5px;
 
   font-family: ${({ theme }) => theme.font};
 
