@@ -9,6 +9,7 @@ import {
   SETBLUR,
   SETINSET,
   SETSHADOWCOLOR,
+  SETLIST,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -77,6 +78,9 @@ const boxShadowList = (state = INITIAL_STATE, action) => {
         `${action.payload.id}.color`,
         action.payload.color
       );
+
+    case SETLIST:
+      return { ...action.payload };
 
     default:
       return state;

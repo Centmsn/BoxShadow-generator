@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
@@ -6,20 +5,14 @@ import styled from "styled-components";
 import Container from "../Container";
 import GalleryCard from "./GalleryCard";
 import presets from "./presets";
-import { generateCode } from "../../helpers";
 
 const Gallery = ({ visibility, setVisibility }) => {
   const renderCards = () => {
     const cards = [];
-
     for (let i = 0; i < presets.length; i++) {
-      const preset = presets[i];
-
+      const preset = JSON.parse(JSON.stringify(presets[i]));
       cards.push(
-        <GalleryCard
-          preset={generateCode(_.omit(preset, "position"))}
-          position={preset.position}
-        />
+        <GalleryCard preset={preset} setVisibility={setVisibility} key={i} />
       );
     }
 

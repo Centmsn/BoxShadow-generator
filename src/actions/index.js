@@ -10,6 +10,7 @@ import {
   SETBLUR,
   SETINSET,
   SETSHADOWCOLOR,
+  SETLIST,
 } from "./types";
 
 export const setBgCol = (r, g, b) => {
@@ -85,5 +86,12 @@ export const setShadowColor = (id, color) => {
   return {
     type: SETSHADOWCOLOR,
     payload: { id, color },
+  };
+};
+
+export const setList = (list) => {
+  return {
+    type: SETLIST,
+    payload: list,
   };
 };

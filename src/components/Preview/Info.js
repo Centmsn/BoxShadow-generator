@@ -81,6 +81,8 @@ const Nav = styled.div.attrs((props) => ({
 `;
 
 const Section = styled.section`
+  flex-basis: 100%;
+
   text-align: center;
 `;
 

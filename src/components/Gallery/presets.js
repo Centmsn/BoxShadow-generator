@@ -1,9 +1,3 @@
-// const presets = [
-
-//   "8px 0px 0px 0px rgba(220, 220, 0, 1), -8px 0px 0px 0px rgba(220, 150, 0, 1), -8px 8px 0px 0px rgba(200, 120, 0, 1), 8px -8px 0px 0px rgba(220, 240, 0, 1)",
-//   "10px 10px 4px 4px rgba(245, 218, 55, 1), 20px 20px 4px 4px rgba(247, 132, 0, 1), 30px 30px 4px 4px rgba(242, 12, 0, 1), 40px 40px 4px 4px rgba(18, 199, 27, 1), 50px 50px 4px 4px rgba(18, 105, 199, 1), 60px 60px 4px 4px rgba(237, 74, 255, 1)",
-//   "0px 0px 6px 12px rgba(92, 245, 158, 1), 0px 0px 0px 14px rgba(39, 160, 85, 1)",
-// ];
 const presets = [
   {
     position: "center",
@@ -59,6 +53,28 @@ const presets = [
       s: 20,
       color: { r: 225, g: 225, b: 225, a: 1 },
     },
+  },
+  {
+    position: "center",
+    0: { x: 20, y: 0, b: 30, s: 0, color: { r: 218, g: 37, b: 16, a: 1 } },
+    1: { x: 0, y: 20, b: 30, s: 0, color: { r: 226, g: 173, b: 29, a: 1 } },
+    2: { x: -20, y: 0, b: 30, s: 0, color: { r: 240, g: 232, b: 15, a: 1 } },
+    3: { x: 0, y: -20, b: 30, s: 0, color: { r: 243, g: 251, b: 126, a: 1 } },
+  },
+  {
+    position: "center",
+    0: { x: 10, y: -10, b: 0, s: 0, color: { r: 100, g: 115, b: 232, a: 1 } },
+    1: { x: -10, y: -10, b: 0, s: 0, color: { r: 80, g: 14, b: 123, a: 1 } },
+    2: { x: 0, y: 0, b: 0, s: 10, color: { r: 81, g: 178, b: 210, a: 1 } },
+  },
+  {
+    position: "center",
+    0: { x: 0, y: 4, b: 0, s: 0, color: { r: 40, g: 113, b: 159, a: 1 } },
+    1: { x: 2, y: 2, b: 0, s: 2, color: { r: 86, g: 173, b: 210, a: 1 } },
+    2: { x: 4, y: 8, b: 0, s: 0, color: { r: 51, g: 95, b: 122, a: 1 } },
+    3: { x: 6, y: 6, b: 0, s: 2, color: { r: 70, g: 147, b: 180, a: 1 } },
+    4: { x: 8, y: 12, b: 0, s: 0, color: { r: 24, g: 86, b: 123, a: 1 } },
+    5: { x: 10, y: 10, b: 0, s: 2, color: { r: 72, g: 139, b: 168, a: 1 } },
   },
 ];
 

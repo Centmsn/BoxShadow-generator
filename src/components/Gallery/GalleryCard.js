@@ -1,9 +1,23 @@
+import _ from "lodash";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
-const GalleryCard = ({ preset, position }) => {
+import { setList, changeActiveId } from "../../actions";
+import { generateCode } from "../../helpers";
+
+const GalleryCard = ({ preset, setList, setVisibility, changeActiveId }) => {
+  const handlePresetDisplay = () => {
+    setList(_.omit(preset, "position"));
+    changeActiveId(0);
+    setVisibility(false);
+  };
+
   return (
-    <Card>
-      <PresetDisplay preset={preset} position={position} />
+    <Card onClick={handlePresetDisplay}>
+      <PresetDisplay
+        preset={generateCode(_.omit(preset, "position"))}
+        position={preset.position}
+      />
     </Card>
   );
 };
@@ -12,7 +26,7 @@ const Card = styled.div`
   position: relative;
   width: 200px;
   height: 200px;
-  margin: 15px auto;
+  margin: 15px;
 
   display: flex;
   align-items: center;
@@ -65,4 +79,4 @@ const PresetDisplay = styled.div`
   box-shadow: ${(props) => props.preset};
 `;
 
-export default GalleryCard;
+export default connect(null, { setList, changeActiveId })(GalleryCard);

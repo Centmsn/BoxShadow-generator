@@ -78,7 +78,7 @@ const Bar = ({
         setInnerBarWidth(opacity + 15);
         setBarInfo(list[activeId].color.a * 100);
     }
-  }, [activeId]);
+  }, [activeId, Object.keys(list).length]);
 
   const handlePositionChange = (e) => {
     const { width, left } = bar.current.getBoundingClientRect();

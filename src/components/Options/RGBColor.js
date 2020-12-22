@@ -14,7 +14,7 @@ const RGBColor = ({ list, activeId, setShadowColor }) => {
     const hex = convertRgbToHex(r, g, b);
 
     setHexColor(hex);
-  }, [activeId]);
+  }, [activeId, Object.keys(list).length]);
 
   const handleColorChange = (e) => {
     if (!thorttle) {
