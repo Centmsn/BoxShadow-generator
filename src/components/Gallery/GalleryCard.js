@@ -1,24 +1,56 @@
 import _ from "lodash";
 import { connect } from "react-redux";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import { useState } from "react";
 
 import { setList, changeActiveId } from "../../actions";
+import Button from "../Button";
 import { generateCode } from "../../helpers";
+import Modal from "../Modal";
 
 const GalleryCard = ({ preset, setList, setVisibility, changeActiveId }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const handlePresetDisplay = () => {
     setList(_.omit(preset, "position"));
     changeActiveId(0);
+    setIsModalVisible(false);
     setVisibility(false);
   };
 
   return (
-    <Card onClick={handlePresetDisplay}>
-      <PresetDisplay
-        preset={generateCode(_.omit(preset, "position"))}
-        position={preset.position}
-      />
-    </Card>
+    <>
+      <Card onClick={() => setIsModalVisible(true)}>
+        <PresetDisplay
+          preset={generateCode(_.omit(preset, "position"))}
+          position={preset.position}
+        />
+      </Card>
+
+      <Modal isVisible={isModalVisible}>
+        <ModalIcon>
+          <FontAwesomeIcon icon={faExclamationCircle} />
+        </ModalIcon>
+
+        <ModalDesc>
+          Selecting this preset will overwrite your current settings.
+        </ModalDesc>
+        <ModalDesc>Do You want to continue?</ModalDesc>
+
+        <Button
+          text={"Confirm"}
+          callback={handlePresetDisplay}
+          color={`rgb(0, 130, 0)`}
+        />
+        <Button
+          text={"Cancel"}
+          callback={() => setIsModalVisible(false)}
+          color={`rgb(150, 0, 0)`}
+        />
+      </Modal>
+    </>
   );
 };
 
@@ -77,6 +109,16 @@ const PresetDisplay = styled.div`
 
   background-color: ${({ theme }) => theme.lightBlue};
   box-shadow: ${(props) => props.preset};
+`;
+
+const ModalDesc = styled.p`
+  flex-basis: 70%;
+`;
+
+const ModalIcon = styled.div`
+  flex-basis: 30%;
+
+  font-size: 4rem;
 `;
 
 export default connect(null, { setList, changeActiveId })(GalleryCard);

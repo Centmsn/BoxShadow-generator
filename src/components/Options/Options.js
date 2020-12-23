@@ -5,19 +5,18 @@ import Checkbox from "./Checkbox";
 import RGBColor from "./RGBColor";
 
 const bars = [
-  { prop: "offset x", min: -100, max: 100 },
-  { prop: "offset y", min: -100, max: 100 },
-  { prop: "spread", min: 0, max: 100 },
-  { prop: "blur", min: 0, max: 100 },
-  { prop: "opacity", min: 0, max: 100 },
+  { name: "offset x", min: -100, max: 100 },
+  { name: "offset y", min: -100, max: 100 },
+  { name: "spread", min: 0, max: 100 },
+  { name: "blur", min: 0, max: 100 },
+  { name: "opacity", min: 0, max: 100 },
 ];
 
 const Options = () => {
   const renderBars = () => {
     return bars.map((el, index) => {
-      const { prop, min, max } = el;
-
-      return <Bar text={prop} index={index + 1} min={min} max={max} />;
+      const { name, min, max } = el;
+      return <Bar text={name} index={index + 1} min={min} max={max} />;
     });
   };
 
