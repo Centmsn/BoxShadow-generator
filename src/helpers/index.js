@@ -6,11 +6,11 @@ export const generateCode = (list) => {
     const { inset, x, y, s, b, color } = list[keys[i]];
 
     if (i === 0) {
-      code += `${inset ? "inset " : ""} ${x}px ${y}px ${b}px ${s}px rgba(${
+      code += `${inset ? " inset " : ""} ${x}px ${y}px ${b}px ${s}px rgba(${
         color.r
       }, ${color.g}, ${color.b}, ${color.a})`;
     } else {
-      code += `,${inset ? "inset " : ""} ${x}px ${y}px ${b}px ${s}px rgba(${
+      code += `,${inset ? " inset " : ""} ${x}px ${y}px ${b}px ${s}px rgba(${
         color.r
       }, ${color.g}, ${color.b}, ${color.a})`;
     }

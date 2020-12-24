@@ -7,7 +7,7 @@ import RGBColor from "./RGBColor";
 const bars = [
   { name: "offset x", min: -100, max: 100 },
   { name: "offset y", min: -100, max: 100 },
-  { name: "spread", min: 0, max: 100 },
+  { name: "spread", min: -100, max: 100 },
   { name: "blur", min: 0, max: 100 },
   { name: "opacity", min: 0, max: 100 },
 ];

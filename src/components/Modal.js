@@ -12,6 +12,7 @@ const Modal = ({ children, isVisible }) => {
 
 const Wrapper = styled.div`
   position: absolute;
+  z-index: 9999;
   top: 0;
   left: 0;
 
@@ -35,6 +36,7 @@ const InnerContainer = styled.div`
   width: 25%;
   min-width: 400px;
   height: 25%;
+  min-height: 250px;
   transform: translate(-50%, -50%);
 
   display: flex;

@@ -25,7 +25,7 @@ const Btn = styled.button`
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 0 4px 0 black;
+    box-shadow: 0 0 4px 0 ${(props) => props.color};
   }
 
   &:focus {

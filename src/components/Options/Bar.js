@@ -63,7 +63,8 @@ const Bar = ({
         break;
 
       case 3:
-        const spread = (width / range) * list[activeId].s - 15;
+        const spread =
+          ((width / range) * (range + 2 * list[activeId].s)) / 2 - 15;
         setSliderPosition(spread);
         setInnerBarWidth(spread + 15);
         setBarInfo(list[activeId].s);
