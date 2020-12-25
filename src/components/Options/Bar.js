@@ -31,6 +31,24 @@ const Bar = ({
   const [barInfo, setBarInfo] = useState(0);
   const bar = useRef(null);
 
+  // ((width / range) * (range + 2 * prop)) / 2 -
+  // 15 * (1 + prop / 100) -
+  // (prop < 0 ? width / range : 0);
+
+  // !incorrent value for range 0 - 100
+  // *correct for -100 - 100
+  const updateBar = (prop, range) => {
+    const { width } = bar.current.getBoundingClientRect();
+    const position =
+      ((width / range) * (range > 100 ? range + 2 * prop : prop)) /
+        (range > 100 ? 2 : 1) -
+      15 * (1 + prop / 100) -
+      (prop < 0 ? width / range : 0);
+    setSliderPosition(position);
+    setInnerBarWidth(position + 15);
+    setBarInfo(prop);
+  };
+
   useEffect(() => {
     // 1 - offsetX
     // 2 - offsetY
@@ -47,41 +65,24 @@ const Bar = ({
 
     switch (index) {
       case 1:
-        const posX =
-          ((width / range) * (range + 2 * list[activeId].x)) / 2 - 15;
-        setSliderPosition(posX);
-        setInnerBarWidth(posX + 15);
-        setBarInfo(list[activeId].x);
+        updateBar(list[activeId].x, range);
         break;
 
       case 2:
-        const posY =
-          ((width / range) * (range + 2 * list[activeId].y)) / 2 - 15;
-        setSliderPosition(posY);
-        setInnerBarWidth(posY + 15);
-        setBarInfo(list[activeId].y);
+        updateBar(list[activeId].y, range);
         break;
 
       case 3:
-        const spread =
-          ((width / range) * (range + 2 * list[activeId].s)) / 2 - 15;
-        setSliderPosition(spread);
-        setInnerBarWidth(spread + 15);
-        setBarInfo(list[activeId].s);
+        updateBar(list[activeId].s, range);
         break;
 
       case 4:
-        const blur = (width / range) * list[activeId].b - 15;
-        setSliderPosition(blur);
-        setInnerBarWidth(blur + 15);
-        setBarInfo(list[activeId].b);
+        updateBar(list[activeId].b, range);
         break;
 
       case 5:
-        const opacity = (width / range) * (list[activeId].color.a * 100) - 30;
-        setSliderPosition(opacity);
-        setInnerBarWidth(opacity + 15);
-        setBarInfo(list[activeId].color.a * 100);
+        updateBar(list[activeId].color.a * 100, range);
+        break;
     }
   }, [activeId, Object.keys(list).length]);
 
@@ -102,7 +103,7 @@ const Bar = ({
   };
 
   const updateBarInfo = (width, left, e) => {
-    const base = (Math.abs(min) + max) / (width - 15);
+    const base = (Math.abs(min) + max) / (width - 30);
     let info;
 
     if (min === 0) {

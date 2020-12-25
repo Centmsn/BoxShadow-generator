@@ -28,7 +28,7 @@ const CodeOutput = ({ list }) => {
 
   return (
     <Wrapper onClick={handleCopyCode}>
-      {code}
+      {code};
       <Info isVisible={infoVisibility}>
         <span>
           <FontAwesomeIcon icon={faCheckCircle} />
