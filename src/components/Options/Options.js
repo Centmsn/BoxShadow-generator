@@ -16,7 +16,9 @@ const Options = () => {
   const renderBars = () => {
     return bars.map((el, index) => {
       const { name, min, max } = el;
-      return <Bar text={name} index={index + 1} min={min} max={max} />;
+      return (
+        <Bar text={name} index={index + 1} min={min} max={max} key={index} />
+      );
     });
   };
 

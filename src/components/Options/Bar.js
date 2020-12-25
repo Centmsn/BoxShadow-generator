@@ -30,6 +30,7 @@ const Bar = ({
   const [innerBarWidth, setInnerBarWidth] = useState(0);
   const [barInfo, setBarInfo] = useState(0);
   const bar = useRef(null);
+  const size = Object.keys(list).length;
 
   // ((width / range) * (range + 2 * prop)) / 2 -
   // 15 * (1 + prop / 100) -
@@ -55,7 +56,6 @@ const Bar = ({
     // 3 - spread
     // 4 - blur
     // 5 - opacity
-    const { width } = bar.current.getBoundingClientRect();
     const range = parseInt(Math.abs(min) + max);
 
     if (!list[activeId]) {
@@ -83,8 +83,11 @@ const Bar = ({
       case 5:
         updateBar(list[activeId].color.a * 100, range);
         break;
+
+      default:
+        throw new Error("Incorrect index number");
     }
-  }, [activeId, Object.keys(list).length]);
+  }, [activeId, size, min, max, index, changeActiveId]);
 
   const handlePositionChange = (e) => {
     const { width, left } = bar.current.getBoundingClientRect();
@@ -148,6 +151,10 @@ const Bar = ({
       case 5:
         const { r, g, b } = list[activeId].color;
         setShadowColor(activeId, { r, g, b, a: offset / 100 });
+        break;
+
+      default:
+        throw new Error("Incorrect index number");
     }
   };
 

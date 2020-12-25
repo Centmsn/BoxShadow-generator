@@ -7,14 +7,15 @@ import { setShadowColor } from "../../actions";
 
 const RGBColor = ({ list, activeId, setShadowColor }) => {
   const [thorttle, setThrottle] = useState(true);
-  const [hexColor, setHexColor] = useState(null);
+  const [hexColor, setHexColor] = useState("#000000");
+  const size = Object.keys(list).length;
 
   useEffect(() => {
     const { r, g, b } = list[activeId].color;
     const hex = convertRgbToHex(r, g, b);
 
     setHexColor(hex);
-  }, [activeId, Object.keys(list).length]);
+  }, [activeId, size]);
 
   const handleColorChange = (e) => {
     if (!thorttle) {

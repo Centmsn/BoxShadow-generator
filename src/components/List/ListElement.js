@@ -19,7 +19,8 @@ const ListElement = ({
   const listItem = useRef(null);
 
   const handleRemoveListItem = () => {
-    const keys = Object.keys(list);
+    const keys = Object.keys(list).map((key) => +key);
+
     if (keys.length - 1 === 0) {
       setListError("You can't remove last element");
 
@@ -29,9 +30,9 @@ const ListElement = ({
         }, 3500);
       return;
     }
-    if (activeId == keys[0] && id == keys[0]) {
+    if (activeId === keys[0] && id === keys[0]) {
       changeActiveId(parseInt(keys[1]));
-    } else if (activeId == id) {
+    } else if (activeId === id) {
       changeActiveId(parseInt(keys[0]));
     }
     removeBoxShadow(id);

@@ -59,6 +59,9 @@ const PreviewSettings = ({
         case 3:
           setBoxCol(r, g, val);
           break;
+
+        default:
+          throw new Error("Index does not exist");
       }
     } else {
       const { r, g, b } = bg;
@@ -75,6 +78,9 @@ const PreviewSettings = ({
         case 3:
           setBgCol(r, g, val);
           break;
+
+        default:
+          throw new Error("Index does not exist");
       }
     }
   };
