@@ -47,3 +47,19 @@ export const convertRgbToHex = (r, g, b) => {
 
   return "#" + r + g + b;
 };
+
+export const throttle = (callback, wait) => {
+  let isWaiting = false;
+
+  return function () {
+    if (isWaiting) {
+      return;
+    }
+
+    isWaiting = true;
+    setTimeout(() => {
+      callback.apply(this, arguments);
+      isWaiting = false;
+    }, wait);
+  };
+};

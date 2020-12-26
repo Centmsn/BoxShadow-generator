@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import { useEffect } from "react";
 
 import Options from "./Options/Options";
 import List from "./List/List";
@@ -6,6 +7,19 @@ import CodeOutput from "./CodeOutput";
 import Preview from "./Preview/Preview";
 
 const App = () => {
+  useEffect(() => {
+    window.addEventListener("beforeunload", displayAlert);
+
+    return () => {
+      window.removeEventListener("beforeunload", displayAlert);
+    };
+  }, []);
+
+  const displayAlert = (e) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>

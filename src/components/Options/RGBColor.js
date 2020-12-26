@@ -2,11 +2,10 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-import { convertHexToRgb, convertRgbToHex } from "../../helpers";
+import { convertHexToRgb, convertRgbToHex, throttle } from "../../helpers";
 import { setShadowColor } from "../../actions";
 
 const RGBColor = ({ list, activeId, setShadowColor }) => {
-  const [thorttle, setThrottle] = useState(true);
   const [hexColor, setHexColor] = useState("#000000");
   const size = Object.keys(list).length;
 
@@ -17,25 +16,20 @@ const RGBColor = ({ list, activeId, setShadowColor }) => {
     setHexColor(hex);
   }, [activeId, size]);
 
-  const handleColorChange = (e) => {
-    if (!thorttle) {
-      return;
-    }
-
-    setThrottle(false);
-
-    const color = convertHexToRgb(e.target.value);
+  const handleColorChange = throttle((e, val) => {
+    const color = convertHexToRgb(val);
     setShadowColor(activeId, color);
-    setHexColor(e.target.value);
-    setTimeout(() => {
-      setThrottle(true);
-    }, 50);
-  };
+    setHexColor(val);
+  }, 50);
 
   return (
     <Wrapper>
       <p>SHADOW COLOR</p>
-      <ColorInput type="color" onChange={handleColorChange} value={hexColor} />
+      <ColorInput
+        type="color"
+        onChange={(e) => handleColorChange(e, e.target.value)}
+        value={hexColor}
+      />
     </Wrapper>
   );
 };
