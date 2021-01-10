@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 const Draggable = ({ setPosition, position, text }) => {
-  const startDrag = () => {
+  const startDrag = (e) => {
+    e.preventDefault();
+
     document.addEventListener("mousemove", setPosition);
     document.addEventListener("mouseup", stopDrag);
   };

@@ -1,8 +1,10 @@
+import { connect } from "react-redux";
 import styled from "styled-components";
 
 import Bar from "./Bar";
 import Checkbox from "./Checkbox";
 import RGBColor from "./RGBColor";
+import { setInset } from "../../actions";
 
 const bars = [
   { name: "offset x", min: -100, max: 100 },
@@ -12,7 +14,11 @@ const bars = [
   { name: "opacity", min: 0, max: 100 },
 ];
 
-const Options = () => {
+const Options = ({ setInset, activeId, list }) => {
+  const handleInset = (value) => {
+    setInset(activeId, value);
+  };
+
   const renderBars = () => {
     return bars.map((el, index) => {
       const { name, min, max } = el;
@@ -27,7 +33,11 @@ const Options = () => {
       {renderBars()}
       <SubContainer>
         <RGBColor />
-        <Checkbox text="Inset" />
+        <Checkbox
+          description="Inset"
+          onClick={handleInset}
+          initialValue={list[activeId].inset}
+        />
       </SubContainer>
     </Wrapper>
   );
@@ -60,4 +70,11 @@ const SubContainer = styled.div`
   padding: 5px;
 `;
 
-export default Options;
+const mapStateToProps = (state) => {
+  return {
+    activeId: state.activeId,
+    list: state.boxShadowList,
+  };
+};
+
+export default connect(mapStateToProps, { setInset })(Options);

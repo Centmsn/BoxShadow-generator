@@ -1,38 +1,38 @@
-import { connect } from "react-redux";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-import { setInset } from "../../actions";
-
-const Checkbox = ({ text, list, setInset, activeId }) => {
-  const [isChecked, setIsChecked] = useState(false);
+const Checkbox = ({ description = "", onClick, initialValue = false }) => {
+  const [isChecked, setIsChecked] = useState(initialValue);
 
   useEffect(() => {
-    if (list[activeId].inset) {
-      setIsChecked(true);
-    } else {
-      setIsChecked(false);
-    }
-  }, [activeId]);
+    setIsChecked(initialValue);
+  }, [initialValue]);
 
   const toggleCheckbox = () => {
     setIsChecked((prev) => !prev);
 
-    setInset(activeId, !isChecked);
+    // pass current state to callback
+    onClick(!isChecked);
   };
 
-  const status = isChecked && <FontAwesomeIcon icon={faCheck} />;
+  const status = <FontAwesomeIcon icon={isChecked ? faCheck : faTimes} />;
 
   return (
-    <Wrapper>
-      <Info>{text.toUpperCase()}</Info>
-      <Box onClick={toggleCheckbox} isChecked={isChecked}>
-        {status}
-      </Box>
+    <Wrapper onClick={toggleCheckbox}>
+      <Info>{description.toUpperCase()}</Info>
+      <Box isChecked={isChecked}>{status}</Box>
     </Wrapper>
   );
+};
+
+Checkbox.propTypes = {
+  description: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  initialValue: PropTypes.bool,
 };
 
 const Wrapper = styled.div`
@@ -55,9 +55,9 @@ const Box = styled.div`
   border: 2px solid ${({ theme }) => theme.darkBlue};
   border-radius: 5px;
 
-  background-color: ${(props) =>
-    props.isChecked ? props.theme.lightBlue : "none"};
   color: ${({ theme }) => theme.darkBlue};
+  background-color: ${({ isChecked }) =>
+    isChecked ? "rgb(255, 207, 77)" : "none"};
 
   padding: 3px;
   cursor: pointer;
@@ -72,11 +72,4 @@ const Info = styled.p`
   user-select: none;
 `;
 
-const mapStateToprops = (state) => {
-  return {
-    activeId: state.activeId,
-    list: state.boxShadowList,
-  };
-};
-
-export default connect(mapStateToprops, { setInset })(Checkbox);
+export default Checkbox;
