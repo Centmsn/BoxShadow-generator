@@ -1,12 +1,14 @@
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 
-import Bar from "./Bar";
+import Bar from "./Slider";
 import Checkbox from "./Checkbox";
-import RGBColor from "./RGBColor";
-import { setInset } from "../../actions";
+import { convertHexToRgb, convertRgbToHex, throttle } from "../../helpers";
+import ColorInput from "./ColorInput";
+import { setInset, setShadowColor } from "../../actions";
 
-const bars = [
+const sliders = [
   { name: "offset x", min: -100, max: 100 },
   { name: "offset y", min: -100, max: 100 },
   { name: "spread", min: -100, max: 100 },
@@ -14,13 +16,35 @@ const bars = [
   { name: "opacity", min: 0, max: 100 },
 ];
 
-const Options = ({ setInset, activeId, list }) => {
+const Options = ({ setInset, setShadowColor, activeId, list }) => {
+  // inset state
+  const [checkbox, setCheckbox] = useState(false);
+
+  // color state
+  const [color, setColor] = useState("#000000");
+
+  useEffect(() => {
+    const { r, g, b } = list[activeId].color;
+    const hex = convertRgbToHex(r, g, b);
+
+    // update current settings on active ID change
+    setCheckbox(list[activeId].inset);
+    setColor(hex);
+  }, [activeId]);
+
   const handleInset = (value) => {
+    setCheckbox(value);
     setInset(activeId, value);
   };
 
-  const renderBars = () => {
-    return bars.map((el, index) => {
+  const handleColorChange = throttle((val) => {
+    const color = convertHexToRgb(val);
+    setShadowColor(activeId, color);
+    setColor(val);
+  }, 50);
+
+  const randerSliders = () => {
+    return sliders.map((el, index) => {
       const { name, min, max } = el;
       return (
         <Bar text={name} index={index + 1} min={min} max={max} key={index} />
@@ -30,14 +54,14 @@ const Options = ({ setInset, activeId, list }) => {
 
   return (
     <Wrapper>
-      {renderBars()}
+      {randerSliders()}
       <SubContainer>
-        <RGBColor />
-        <Checkbox
-          description="Inset"
-          onClick={handleInset}
-          initialValue={list[activeId].inset}
+        <ColorInput
+          description="shadow color"
+          onChange={handleColorChange}
+          value={color}
         />
+        <Checkbox description="inset" onClick={handleInset} value={checkbox} />
       </SubContainer>
     </Wrapper>
   );
@@ -75,4 +99,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setInset })(Options);
+export default connect(mapStateToProps, { setInset, setShadowColor })(Options);

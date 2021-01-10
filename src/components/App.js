@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import { useEffect } from "react";
 
 import CodeOutput from "./CodeOutput";

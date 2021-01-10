@@ -3,28 +3,19 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
 
-const Checkbox = ({ description = "", onClick, initialValue = false }) => {
-  const [isChecked, setIsChecked] = useState(initialValue);
-
-  useEffect(() => {
-    setIsChecked(initialValue);
-  }, [initialValue]);
-
+const Checkbox = ({ description = "", onClick, value }) => {
   const toggleCheckbox = () => {
-    setIsChecked((prev) => !prev);
-
     // pass current state to callback
-    onClick(!isChecked);
+    onClick(!value);
   };
 
-  const status = <FontAwesomeIcon icon={isChecked ? faCheck : faTimes} />;
+  const status = <FontAwesomeIcon icon={value ? faCheck : faTimes} />;
 
   return (
     <Wrapper onClick={toggleCheckbox}>
       <Info>{description.toUpperCase()}</Info>
-      <Box isChecked={isChecked}>{status}</Box>
+      <Box isChecked={value}>{status}</Box>
     </Wrapper>
   );
 };
@@ -32,7 +23,7 @@ const Checkbox = ({ description = "", onClick, initialValue = false }) => {
 Checkbox.propTypes = {
   description: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  initialValue: PropTypes.bool,
+  value: PropTypes.bool.isRequired,
 };
 
 const Wrapper = styled.div`
@@ -56,8 +47,6 @@ const Box = styled.div`
   border-radius: 5px;
 
   color: ${({ theme }) => theme.colors.darkBlue};
-  background-color: ${({ isChecked }) =>
-    isChecked ? "rgb(255, 207, 77)" : "none"};
 
   padding: 3px;
   cursor: pointer;

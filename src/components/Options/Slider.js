@@ -12,7 +12,7 @@ import {
   changeActiveId,
 } from "../../actions";
 
-const Bar = ({
+const Slider = ({
   list,
   text,
   min,
@@ -222,4 +222,4 @@ export default connect(mapStateToProps, {
   setBlur,
   setShadowColor,
   changeActiveId,
-})(Bar);
+})(Slider);
