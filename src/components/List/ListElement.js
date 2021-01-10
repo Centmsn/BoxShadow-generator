@@ -65,9 +65,9 @@ const ListElement = ({
   );
 };
 
-const Wrapper = styled.div.attrs((props) => ({
+const Wrapper = styled.div.attrs(({ color }) => ({
   style: {
-    backgroundColor: props.color,
+    backgroundColor: color,
   },
 }))`
   position: relative;
@@ -81,10 +81,10 @@ const Wrapper = styled.div.attrs((props) => ({
   border-radius: 5px;
   box-shadow: 0 0 0 2px white,
     0 0 0 4px
-      ${(props) =>
-        props.active ? props.theme.darkBlue : props.theme.lightBlue},
+      ${({ theme, active }) =>
+        active ? theme.colors.darkBlue : theme.colors.lightBlue},
     0 0 0 6px
-      ${(props) => (props.active ? props.theme.darkBlue : "transparent")};
+      ${({ theme, active }) => (active ? theme.colors.darkBlue : "transparent")};
 
   font-size: 2rem;
   -webkit-text-stroke-width: 0.5px;
@@ -96,15 +96,16 @@ const Wrapper = styled.div.attrs((props) => ({
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 0 0 2px white, 0 0 0 4px ${(props) => props.theme.darkBlue},
+    box-shadow: 0 0 0 2px white,
+      0 0 0 4px ${({ theme }) => theme.colors.darkBlue},
       0 0 0 6px
-        ${(props) =>
-          props.active ? props.theme.darkBlue : props.theme.lightBlue};
+        ${({ theme, active }) =>
+          active ? theme.colors.darkBlue : theme.colors.lightBlue};
   }
 
   span {
     line-height: 2rem;
-    color: ${({ theme }) => theme.lightBlue};
+    color: ${({ theme }) => theme.colors.lightBlue};
 
     &::after {
       content: "remove shadow";
@@ -119,7 +120,7 @@ const Wrapper = styled.div.attrs((props) => ({
       -webkit-text-stroke-width: 0px;
 
       color: white;
-      background-color: ${({ theme }) => theme.lightBlue};
+      background-color: ${({ theme }) => theme.colors.lightBlue};
 
       opacity: 0;
       display: none;
@@ -128,7 +129,7 @@ const Wrapper = styled.div.attrs((props) => ({
     }
 
     &:hover {
-      color: ${({ theme }) => theme.darkBlue};
+      color: ${({ theme }) => theme.colors.darkBlue};
       &::after {
         opacity: 1;
         display: inline;
@@ -146,7 +147,7 @@ const Error = styled.p`
   font-size: 1.25rem;
   -webkit-text-stroke-width: 0;
 
-  color: ${({ theme }) => theme.lightGray};
+  color: ${({ theme }) => theme.colors.lightGray};
 `;
 
 const mapStateToProps = (state) => {

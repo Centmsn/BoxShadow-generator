@@ -1,10 +1,12 @@
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { useEffect } from "react";
 
-import Options from "./Options/Options";
-import List from "./List/List";
 import CodeOutput from "./CodeOutput";
+import GlobalStyle from "../GlobalStyles";
+import List from "./List/List";
+import Options from "./Options/Options";
 import Preview from "./Preview/Preview";
+import Theme from "../Theme";
 
 const App = () => {
   useEffect(() => {
@@ -22,34 +24,17 @@ const App = () => {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
+      <GlobalStyle />
+      <Theme>
         <Wrapper>
           <List />
           <Options />
           <Preview />
           <CodeOutput />
         </Wrapper>
-      </ThemeProvider>
+      </Theme>
     </>
   );
-};
-
-const GlobalStyle = createGlobalStyle`
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-`;
-
-const theme = {
-  font: "'Baloo 2', cursive",
-  darkBlue: "rgb(0, 32, 84)",
-  darkBlueTransparent: "rgb(0, 32, 84, 0.9)",
-  lightBlue: "rgb(175, 193, 222)",
-  lightGray: "rgb(160, 160, 160)",
-  border: "4px solid rgb(0, 32, 84)",
 };
 
 const Wrapper = styled.div`

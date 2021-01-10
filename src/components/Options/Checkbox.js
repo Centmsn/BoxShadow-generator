@@ -52,10 +52,10 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
 
-  border: 2px solid ${({ theme }) => theme.darkBlue};
+  border: 2px solid ${({ theme }) => theme.colors.darkBlue};
   border-radius: 5px;
 
-  color: ${({ theme }) => theme.darkBlue};
+  color: ${({ theme }) => theme.colors.darkBlue};
   background-color: ${({ isChecked }) =>
     isChecked ? "rgb(255, 207, 77)" : "none"};
 

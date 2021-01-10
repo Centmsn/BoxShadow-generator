@@ -184,7 +184,7 @@ const OptionBar = styled.div`
   flex-basis: 75%;
   height: 25px;
 
-  border: 2px solid ${({ theme }) => theme.darkBlue};
+  border: 2px solid ${({ theme }) => theme.colors.darkBlue};
   border-radius: 5px;
 `;
 
@@ -198,7 +198,7 @@ const InnerBar = styled.div.attrs((props) => ({
   bottom: 0;
 
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.lightBlue};
+  background-color: ${({ theme }) => theme.colors.lightBlue};
 `;
 
 const Label = styled.p`

@@ -20,12 +20,11 @@ const Wrapper = styled.div.attrs((props) => ({
   justify-content: center;
   align-items: center;
 
-  border: ${({ theme }) => theme.border};
+  border: ${({ theme }) => theme.others.border};
   border-radius: 5px;
 
-  font-family: ${({ theme }) => theme.font};
   font-size: 1rem;
-  background-color: ${({ theme }) => theme.darkBlueTransparent};
+  background-color: ${({ theme }) => theme.colors.darkBlueTransparent};
   color: white;
 
   transition: 300ms;

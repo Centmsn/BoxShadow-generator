@@ -239,16 +239,15 @@ const Nav = styled.div.attrs((props) => ({
     left: 5px;
     top: 5px;
 
-    font-family: ${({ theme }) => theme.font};
     font-size: 2rem;
 
-    color: ${({ theme }) => theme.lightGray};
+    color: ${({ theme }) => theme.colors.lightGray};
     opacity: 0;
     visibility: hidden;
   }
 
   &:hover {
-    color: ${({ theme }) => theme.lightBlue};
+    color: ${({ theme }) => theme.colors.lightBlue};
     &::before {
       opacity: 1;
       visibility: visible;
@@ -265,10 +264,9 @@ const ColorInput = styled.input`
   border-left: none;
   border-right: none;
   border-bottom: 2px solid
-    ${(props) => (props.error ? "red" : props.theme.lightBlue)};
+    ${({ theme, error }) => (error ? "red" : theme.colors.lightBlue)};
   outline: none;
 
-  font-family: ${({ theme }) => theme.font};
   font-size: 1.1rem;
   color: white;
 
@@ -294,7 +292,7 @@ const Section = styled.section`
   }
 
   label {
-    color: ${({ theme }) => theme.lightGray};
+    color: ${({ theme }) => theme.colors.lightGray};
   }
 `;
 
@@ -310,7 +308,7 @@ const ResetBtn = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.lightBlue};
+    color: ${({ theme }) => theme.colors.lightBlue};
   }
 `;
 
@@ -320,7 +318,7 @@ const Tooltip = styled.p`
 
   text-align: center;
 
-  color: ${({ theme }) => theme.lightGray};
+  color: ${({ theme }) => theme.colors.lightGray};
 `;
 
 const mapStateToProps = (state) => {

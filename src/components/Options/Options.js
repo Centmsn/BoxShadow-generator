@@ -51,10 +51,8 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  border: ${({ theme }) => theme.border};
+  border: ${({ theme }) => theme.others.border};
   border-radius: 5px;
-
-  font-family: ${({ theme }) => theme.font};
 
   padding: 10px;
 `;
@@ -65,7 +63,7 @@ const SubContainer = styled.div`
   display: flex;
 
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.lightBlue};
+  background-color: ${({ theme }) => theme.colors.lightBlue};
 
   padding: 5px;
 `;

@@ -34,14 +34,13 @@ const DraggableEl = styled.div.attrs((props) => ({
   justify-content: center;
   align-items: center;
 
-  background-color: ${({ theme }) => theme.lightBlue};
-  border: 1px solid ${({ theme }) => theme.darkBlue};
+  background-color: ${({ theme }) => theme.colors.lightBlue};
+  border: 1px solid ${({ theme }) => theme.colors.darkBlue};
   border-radius: 5px;
 
   cursor: pointer;
 
   p {
-    font-family: ${({ theme }) => theme.font};
     color: white;
 
     user-select: none;

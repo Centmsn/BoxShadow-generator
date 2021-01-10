@@ -61,17 +61,16 @@ const Nav = styled.div.attrs((props) => ({
     left: 5px;
     top: 5px;
 
-    font-family: ${({ theme }) => theme.font};
     font-size: 2rem;
 
-    color: ${({ theme }) => theme.lightGray};
+    color: ${({ theme }) => theme.colors.lightGray};
     opacity: 0;
     visibility: hidden;
   }
 
   &:hover {
     margin-left: 15px;
-    color: ${({ theme }) => theme.lightBlue};
+    color: ${({ theme }) => theme.colors.lightBlue};
 
     &::before {
       opacity: 1;

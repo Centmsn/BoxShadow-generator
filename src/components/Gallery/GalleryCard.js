@@ -65,7 +65,7 @@ const Card = styled.div`
   justify-content: center;
 
   border-radius: 5px;
-  box-shadow: 0 0 0 3px ${({ theme }) => theme.lightBlue};
+  box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.lightBlue};
   background-color: whitesmoke;
 
   cursor: pointer;
@@ -82,8 +82,8 @@ const Card = styled.div`
     text-align: center;
     font-size: 1.25rem;
 
-    color: ${({ theme }) => theme.darkBlue};
-    background-color: ${({ theme }) => theme.lightBlue};
+    color: ${({ theme }) => theme.colors.darkBlue};
+    background-color: ${({ theme }) => theme.colors.lightBlue};
 
     opacity: 0;
     visibility: hidden;
@@ -107,7 +107,7 @@ const PresetDisplay = styled.div`
   transform: ${(props) =>
     props.position === "center" ? "translate(0)" : "translate(-25%, -25%)"};
 
-  background-color: ${({ theme }) => theme.lightBlue};
+  background-color: ${({ theme }) => theme.colors.lightBlue};
   box-shadow: ${(props) => props.preset};
 `;
 

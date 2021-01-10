@@ -43,13 +43,12 @@ const Wrapper = styled.div`
   position: relative;
   grid-area: 11/2/13/3;
 
-  border: ${({ theme }) => theme.border};
+  border: ${({ theme }) => theme.others.border};
   border-radius: 5px;
 
-  font-family: ${({ theme }) => theme.font};
   font-size: 1.25rem;
 
-  background-color: ${({ theme }) => theme.darkBlue};
+  background-color: ${({ theme }) => theme.colors.darkBlue};
   color: white;
 
   overflow-x: hidden;
@@ -65,7 +64,7 @@ const Wrapper = styled.div`
     bottom: 0;
 
     border-radius: 5px;
-    background-color: ${({ theme }) => theme.lightBlue};
+    background-color: ${({ theme }) => theme.colors.lightBlue};
 
     padding: 0 3px;
     visibility: hidden;

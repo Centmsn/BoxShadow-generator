@@ -55,10 +55,8 @@ const Wrapper = styled.div`
   position: relative;
   grid-area: 6/1/13/2;
 
-  border: ${({ theme }) => theme.border};
+  border: ${({ theme }) => theme.others.border};
   border-radius: 5px;
-
-  font-family: ${({ theme }) => theme.font};
 
   overflow-y: auto;
   overflow-x: hidden;
@@ -76,7 +74,7 @@ const AddBtn = styled.button`
   border: none;
   outline: none;
 
-  background-color: ${({ theme }) => theme.darkBlue};
+  background-color: ${({ theme }) => theme.colors.darkBlue};
   color: white;
 
   font-size: 1.4rem;
@@ -84,7 +82,7 @@ const AddBtn = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.lightBlue};
+    background-color: ${({ theme }) => theme.colors.lightBlue};
   }
 `;
 

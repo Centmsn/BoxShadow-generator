@@ -19,7 +19,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 
-  font-family: ${({ theme }) => theme.font};
   font-size: 1.25rem;
   text-align: center;
 
@@ -48,7 +47,7 @@ const InnerContainer = styled.div`
   border-radius: 5px;
   box-shadow: 0 0 5px 1px black;
 
-  background-color: ${({ theme }) => theme.lightBlue};
+  background-color: ${({ theme }) => theme.colors.lightBlue};
 `;
 
 export default Modal;

@@ -83,11 +83,11 @@ const OptionBar = styled.div`
   display: flex;
   justify-content: flex-end;
 
-  border-bottom: ${({ theme }) => theme.border};
+  border-bottom: ${({ theme }) => theme.others.border};
   border-radius: 5px;
   font-size: 3rem;
 
-  background-color: ${({ theme }) => theme.darkBlue};
+  background-color: ${({ theme }) => theme.colors.darkBlue};
 
   padding-top: 5px;
   padding-right: 5px;
