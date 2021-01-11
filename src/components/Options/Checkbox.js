@@ -4,18 +4,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Checkbox = ({ description = "", onClick, value }) => {
+import { useState, useEffect } from "react";
+
+const Checkbox = ({ description = "", onClick, initialValue = false }) => {
+  const [checkboxState, setCheckboxState] = useState(false);
+
+  useEffect(() => {
+    // update state on active ID change
+    setCheckboxState(initialValue);
+  }, [initialValue]);
+
   const toggleCheckbox = () => {
+    setCheckboxState((prev) => !prev);
     // pass current state to callback
-    onClick(!value);
+    onClick(!checkboxState);
   };
 
-  const status = <FontAwesomeIcon icon={value ? faCheck : faTimes} />;
+  const status = <FontAwesomeIcon icon={checkboxState ? faCheck : faTimes} />;
 
   return (
     <Wrapper onClick={toggleCheckbox}>
       <Info>{description.toUpperCase()}</Info>
-      <Box isChecked={value}>{status}</Box>
+      <Box isChecked={checkboxState}>{status}</Box>
     </Wrapper>
   );
 };
@@ -23,7 +33,7 @@ const Checkbox = ({ description = "", onClick, value }) => {
 Checkbox.propTypes = {
   description: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  value: PropTypes.bool.isRequired,
+  initialValue: PropTypes.bool,
 };
 
 const Wrapper = styled.div`

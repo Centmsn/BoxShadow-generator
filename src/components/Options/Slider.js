@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 
-import Draggable from "./Draggable";
 import {
   setOffsetX,
   setOffsetY,
@@ -11,6 +10,9 @@ import {
   setShadowColor,
   changeActiveId,
 } from "../../actions";
+
+// !
+// TODO create enum for bar types
 
 const Slider = ({
   list,
@@ -157,17 +159,27 @@ const Slider = ({
         throw new Error("Incorrect index number");
     }
   };
+  // slider part
+  const startDrag = (e) => {
+    e.preventDefault();
+
+    document.addEventListener("mousemove", handlePositionChange);
+    document.addEventListener("mouseup", stopDrag);
+  };
+
+  const stopDrag = () => {
+    document.removeEventListener("mousemove", handlePositionChange);
+    document.removeEventListener("mouseup", stopDrag);
+  };
 
   return (
     <Wrapper>
       <Label>{text.toUpperCase()}</Label>
       <OptionBar ref={bar}>
         <InnerBar width={innerBarWidth} />
-        <Draggable
-          position={sliderPosition}
-          setPosition={handlePositionChange}
-          text={barInfo}
-        />
+        <Draggable position={sliderPosition} onMouseDown={startDrag}>
+          {barInfo}
+        </Draggable>
       </OptionBar>
     </Wrapper>
   );
@@ -199,6 +211,29 @@ const InnerBar = styled.div.attrs((props) => ({
 
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.lightBlue};
+`;
+
+const Draggable = styled.div.attrs((props) => ({
+  style: {
+    left: props.position,
+  },
+}))`
+  position: absolute;
+  height: 140%;
+  width: 30px;
+  transform: translateY(-15%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  background-color: ${({ theme }) => theme.colors.lightBlue};
+  border: 1px solid ${({ theme }) => theme.colors.darkBlue};
+  border-radius: 5px;
+
+  cursor: pointer;
+  user-select: none;
 `;
 
 const Label = styled.p`

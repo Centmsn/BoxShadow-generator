@@ -1,14 +1,30 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const ColorInput = ({ description = "", onChange, value }) => {
+import { convertHexToRgb, convertRgbToHex, throttle } from "../../helpers";
+import { useState, useEffect } from "react";
+
+const ColorInput = ({ description = "", onChange, value = "#000000" }) => {
+  const [color, setColor] = useState("#000000");
+
+  useEffect(() => {
+    const { r, g, b } = value;
+    const hex = convertRgbToHex(r, g, b);
+    setColor(hex);
+  }, [value]);
+
+  const handleColorChange = throttle((value) => {
+    const color = convertHexToRgb(value);
+    onChange(color);
+  }, 50);
+
   return (
     <Wrapper>
       <p>{description.toUpperCase()}</p>
       <Input
         type="color"
-        onChange={(e) => onChange(e.target.value)}
-        value={value}
+        onChange={(e) => handleColorChange(e.target.value)}
+        value={color}
       />
     </Wrapper>
   );
@@ -17,7 +33,11 @@ const ColorInput = ({ description = "", onChange, value }) => {
 ColorInput.propTypes = {
   description: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.shape({
+    r: PropTypes.number,
+    g: PropTypes.number,
+    b: PropTypes.number,
+  }).isRequired,
 };
 
 const Wrapper = styled.div`
@@ -33,11 +53,8 @@ const Wrapper = styled.div`
 const Input = styled.input`
   width: 25%;
 
-  border: none;
   border-radius: 5px;
-  outline: none;
 
-  background: none;
   padding: 0 2px;
   cursor: pointer;
 

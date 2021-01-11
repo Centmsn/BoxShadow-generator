@@ -1,10 +1,8 @@
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
 
 import Bar from "./Slider";
 import Checkbox from "./Checkbox";
-import { convertHexToRgb, convertRgbToHex, throttle } from "../../helpers";
 import ColorInput from "./ColorInput";
 import { setInset, setShadowColor } from "../../actions";
 
@@ -17,31 +15,15 @@ const sliders = [
 ];
 
 const Options = ({ setInset, setShadowColor, activeId, list }) => {
-  // inset state
-  const [checkbox, setCheckbox] = useState(false);
-
-  // color state
-  const [color, setColor] = useState("#000000");
-
-  useEffect(() => {
-    const { r, g, b } = list[activeId].color;
-    const hex = convertRgbToHex(r, g, b);
-
-    // update current settings on active ID change
-    setCheckbox(list[activeId].inset);
-    setColor(hex);
-  }, [activeId]);
-
+  // manage redux store
   const handleInset = (value) => {
-    setCheckbox(value);
     setInset(activeId, value);
   };
 
-  const handleColorChange = throttle((val) => {
-    const color = convertHexToRgb(val);
+  // manage redux store
+  const handleColor = (color) => {
     setShadowColor(activeId, color);
-    setColor(val);
-  }, 50);
+  };
 
   const randerSliders = () => {
     return sliders.map((el, index) => {
@@ -58,10 +40,15 @@ const Options = ({ setInset, setShadowColor, activeId, list }) => {
       <SubContainer>
         <ColorInput
           description="shadow color"
-          onChange={handleColorChange}
-          value={color}
+          onChange={handleColor}
+          value={list[activeId].color}
         />
-        <Checkbox description="inset" onClick={handleInset} value={checkbox} />
+
+        <Checkbox
+          description="inset"
+          onClick={handleInset}
+          initialValue={list[activeId].inset}
+        />
       </SubContainer>
     </Wrapper>
   );

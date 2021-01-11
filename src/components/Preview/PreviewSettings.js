@@ -259,13 +259,8 @@ const ColorInput = styled.input`
   width: 35px;
   margin-left: 5px;
 
-  background: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
   border-bottom: 2px solid
     ${({ theme, error }) => (error ? "red" : theme.colors.lightBlue)};
-  outline: none;
 
   font-size: 1.1rem;
   color: white;
@@ -297,9 +292,6 @@ const Section = styled.section`
 `;
 
 const ResetBtn = styled.button`
-  border: none;
-  outline: none;
-
   font-size: 2rem;
 
   background: none;

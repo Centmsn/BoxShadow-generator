@@ -12,9 +12,7 @@ const Btn = styled.button`
   min-width: 150px;
 
   border: 2px solid ${(props) => props.color};
-
   border-radius: 5px;
-  outline: none;
 
   font-size: 2rem;
 
