@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 import ListElement from "./ListElement";
-import { addBoxShadow } from "../../actions";
+import { addBoxShadow } from "../../state";
 
 const List = ({ addBoxShadow, list }) => {
   const handleBoxShadowAdd = () => {
@@ -25,7 +25,7 @@ const List = ({ addBoxShadow, list }) => {
         )
       );
 
-    return code.map((el, index) => {
+    return code.map((_, index) => {
       const color = code[index].slice(code[index].match(/rgba/).index);
 
       return (

@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import Container from "../Shared/Container";
-import { setBgCol, setBoxCol, setBoxRadius } from "../../actions";
+import { setBgCol, setBoxCol, setBoxRadius } from "../../state";
 import { validateNumberInput } from "../../helpers";
 
 const PreviewSettings = ({

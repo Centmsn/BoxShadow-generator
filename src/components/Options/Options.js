@@ -11,7 +11,7 @@ import {
   setOffsetY,
   setSpread,
   setBlur,
-} from "../../actions";
+} from "../../state";
 
 const Options = ({
   setInset,

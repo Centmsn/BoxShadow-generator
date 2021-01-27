@@ -1,16 +1,5 @@
 import _ from "lodash";
-
-import {
-  ADDBOXSHADOW,
-  REMOVEBOXSHADOW,
-  SETOFFSETX,
-  SETOFFSETY,
-  SETSPREAD,
-  SETBLUR,
-  SETINSET,
-  SETSHADOWCOLOR,
-  SETLIST,
-} from "../actions/types";
+import { actionType } from "../actions/types";
 
 const INITIAL_STATE = {
   0: {
@@ -25,7 +14,7 @@ const INITIAL_STATE = {
 
 const boxShadowList = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ADDBOXSHADOW:
+    case actionType.ADDBOXSHADOW:
       return {
         ...state,
         [parseInt(_.findLastKey(state)) + 1]: {
@@ -38,48 +27,48 @@ const boxShadowList = (state = INITIAL_STATE, action) => {
         },
       };
 
-    case REMOVEBOXSHADOW:
+    case actionType.REMOVEBOXSHADOW:
       return _.omit({ ...state }, action.payload);
 
-    case SETOFFSETX:
+    case actionType.SETOFFSETX:
       return _.set(
         { ...state },
         `${action.payload.id}.x`,
         action.payload.offset
       );
 
-    case SETOFFSETY:
+    case actionType.SETOFFSETY:
       return _.set(
         { ...state },
         `${action.payload.id}.y`,
         action.payload.offset
       );
 
-    case SETSPREAD:
+    case actionType.SETSPREAD:
       return _.set(
         { ...state },
         `${action.payload.id}.s`,
         action.payload.spread
       );
 
-    case SETBLUR:
+    case actionType.SETBLUR:
       return _.set({ ...state }, `${action.payload.id}.b`, action.payload.blur);
 
-    case SETINSET:
+    case actionType.SETINSET:
       return _.set(
         { ...state },
         `${action.payload.id}.inset`,
         action.payload.isInset
       );
 
-    case SETSHADOWCOLOR:
+    case actionType.SETSHADOWCOLOR:
       return _.set(
         { ...state },
         `${action.payload.id}.color`,
         action.payload.color
       );
 
-    case SETLIST:
+    case actionType.SETLIST:
       return { ...action.payload };
 
     default:

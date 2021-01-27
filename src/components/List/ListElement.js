@@ -4,7 +4,7 @@ import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useRef, useState } from "react";
 
-import { removeBoxShadow, changeActiveId } from "../../actions";
+import { removeBoxShadow, changeActiveId } from "../../state";
 
 const ListElement = ({
   list,

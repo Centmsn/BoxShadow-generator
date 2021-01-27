@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { useEffect } from "react";
 
 import CodeOutput from "./Output/CodeOutput";
-import GlobalStyle from "../GlobalStyles";
+import GlobalStyle from "../style/GlobalStyles";
 import List from "./List/List";
 import Options from "./Options/Options";
 import Preview from "./Preview/Preview";
-import Theme from "../Theme";
+import Theme from "../style/Theme";
 
 /**
  * Functional React component - main app components, contains all other components

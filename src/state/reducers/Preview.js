@@ -1,4 +1,4 @@
-import { SETBGCOL, SETEXAMPLECOL, SETEXAMPLERADIUS } from "../actions/types";
+import { actionType } from "../actions/types";
 
 const INITIAL_STATE = {
   bg: { r: 255, g: 255, b: 255 },
@@ -8,13 +8,13 @@ const INITIAL_STATE = {
 
 const preview = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SETBGCOL:
+    case actionType.SETBGCOL:
       return { ...state, bg: action.payload };
 
-    case SETEXAMPLECOL:
+    case actionType.SETEXAMPLECOL:
       return { ...state, example: action.payload };
 
-    case SETEXAMPLERADIUS:
+    case actionType.SETEXAMPLERADIUS:
       return { ...state, radius: action.payload };
 
     default:

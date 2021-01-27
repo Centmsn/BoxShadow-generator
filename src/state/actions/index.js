@@ -1,105 +1,91 @@
-import {
-  SETBGCOL,
-  SETEXAMPLECOL,
-  SETEXAMPLERADIUS,
-  ADDBOXSHADOW,
-  REMOVEBOXSHADOW,
-  CHANGEACTIVEID,
-  SETOFFSETX,
-  SETOFFSETY,
-  SETSPREAD,
-  SETBLUR,
-  SETINSET,
-  SETSHADOWCOLOR,
-  SETLIST,
-} from "./types";
+import { actionType } from "./types";
 
 export const setBgCol = (r, g, b) => {
   return {
-    type: SETBGCOL,
+    type: actionType.SETBGCOL,
     payload: { r, g, b },
   };
 };
 
 export const setBoxCol = (r, g, b) => {
   return {
-    type: SETEXAMPLECOL,
+    type: actionType.SETEXAMPLECOL,
     payload: { r, g, b },
   };
 };
 
 export const setBoxRadius = (radius) => {
   return {
-    type: SETEXAMPLERADIUS,
+    type: actionType.SETEXAMPLERADIUS,
     payload: radius,
   };
 };
 
 export const addBoxShadow = () => {
   return {
-    type: ADDBOXSHADOW,
+    type: actionType.ADDBOXSHADOW,
   };
 };
 
 export const removeBoxShadow = (id) => {
   return {
-    type: REMOVEBOXSHADOW,
+    type: actionType.REMOVEBOXSHADOW,
     payload: id,
   };
 };
 
 export const changeActiveId = (id) => {
   return {
-    type: CHANGEACTIVEID,
+    type: actionType.CHANGEACTIVEID,
     payload: id,
   };
 };
 
 export const setOffsetX = (offset, id) => {
   return {
-    type: SETOFFSETX,
+    type: actionType.SETOFFSETX,
     payload: { offset, id },
   };
 };
 
 export const setOffsetY = (offset, id) => {
   return {
-    type: SETOFFSETY,
+    type: actionType.SETOFFSETY,
     payload: { offset, id },
   };
 };
 
 export const setSpread = (spread, id) => {
   return {
-    type: SETSPREAD,
+    type: actionType.SETSPREAD,
     payload: { spread, id },
   };
 };
 
 export const setBlur = (blur, id) => {
   return {
-    type: SETBLUR,
+    type: actionType.SETBLUR,
     payload: { blur, id },
   };
 };
 
 export const setInset = (isInset, id) => {
   return {
-    type: SETINSET,
+    type: actionType.SETINSET,
     payload: { id, isInset },
   };
 };
 
 export const setShadowColor = (color, id) => {
   return {
-    type: SETSHADOWCOLOR,
+    type: actionType.SETSHADOWCOLOR,
     payload: { id, color },
   };
 };
 
 export const setList = (list) => {
   return {
-    type: SETLIST,
+    type: actionType.SETLIST,
     payload: list,
   };
 };

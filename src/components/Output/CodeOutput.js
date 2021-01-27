@@ -11,6 +11,7 @@ const CodeOutput = ({ list }) => {
   const code = `box-shadow: ${generateCode(list)}`;
 
   const handleCopyCode = () => {
+    // *Move to helpers?
     const el = document.createElement("textarea");
     el.value = code;
     el.setAttribute("readonly", "");

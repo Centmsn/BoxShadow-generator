@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useState } from "react";
 
-import { setList, changeActiveId } from "../../actions";
+import { setList, changeActiveId } from "../../state";
 import Button from "../Shared/Button";
 import { generateCode } from "../../helpers";
 import Modal from "../Shared/Modal";
