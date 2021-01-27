@@ -1,6 +1,11 @@
 import { createPortal } from "react-dom";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
+/**
+ * Functional React component - renders modal on the screen
+ * @returns {JSX.Element}
+ */
 const Modal = ({ children, isVisible }) => {
   return createPortal(
     <Wrapper isVisible={isVisible}>
@@ -8,6 +13,17 @@ const Modal = ({ children, isVisible }) => {
     </Wrapper>,
     document.getElementById("modal")
   );
+};
+
+Modal.propTypes = {
+  /**
+   * Triggers modal visibility
+   */
+  isVisible: PropTypes.bool,
+};
+
+Modal.defaultProps = {
+  isVisible: false,
 };
 
 const Wrapper = styled.div`

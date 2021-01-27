@@ -1,12 +1,24 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
+/**
+ * Functional React component - wrapper for Gallery, PreviewSettings and Info.
+ * @returns {JSX.Element}
+ */
 const Container = ({ visible, children }) => {
   return <Wrapper visible={visible}>{children}</Wrapper>;
 };
 
-const Wrapper = styled.div.attrs((props) => ({
+Container.propTypes = {
+  /**
+   * Trigger component visibility
+   */
+  visible: PropTypes.bool.isRequired,
+};
+
+const Wrapper = styled.div.attrs(({ visible }) => ({
   style: {
-    transform: props.visible ? "scale(1)" : "scale(0)",
+    transform: visible ? "scale(1)" : "scale(0)",
   },
 }))`
   position: absolute;
