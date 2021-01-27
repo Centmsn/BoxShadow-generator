@@ -24,8 +24,8 @@ const App = () => {
 
   return (
     <>
-      <GlobalStyle />
       <Theme>
+        <GlobalStyle />
         <Wrapper>
           <List />
           <Options />

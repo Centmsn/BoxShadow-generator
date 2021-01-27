@@ -1,96 +1,22 @@
-import { connect } from "react-redux";
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-import {
-  setOffsetX,
-  setOffsetY,
-  setSpread,
-  setBlur,
-  setShadowColor,
-  changeActiveId,
-} from "../../actions";
-
-// !
-// TODO create enum for bar types
-
-const Slider = ({
-  list,
-  text,
-  min,
-  max,
-  index,
-  activeId,
-  setOffsetX,
-  setOffsetY,
-  setSpread,
-  setBlur,
-  setShadowColor,
-  changeActiveId,
-}) => {
+/**
+ * Functional React component - renders range input on the screen
+ * @returns {JSX.Element}
+ */
+const Slider = ({ text, min, max, onChange, value }) => {
   const [sliderPosition, setSliderPosition] = useState(0);
-  const [innerBarWidth, setInnerBarWidth] = useState(0);
-  const [barInfo, setBarInfo] = useState(0);
   const bar = useRef(null);
-  const size = Object.keys(list).length;
-
-  // ((width / range) * (range + 2 * prop)) / 2 -
-  // 15 * (1 + prop / 100) -
-  // (prop < 0 ? width / range : 0);
-
-  // !incorrent value for range 0 - 100
-  // *correct for -100 - 100
-  const updateBar = (prop, range) => {
-    const { width } = bar.current.getBoundingClientRect();
-    const position =
-      ((width / range) * (range > 100 ? range + 2 * prop : prop)) /
-        (range > 100 ? 2 : 1) -
-      15 * (1 + prop / 100) -
-      (prop < 0 ? width / range : 0);
-    setSliderPosition(position);
-    setInnerBarWidth(position + 15);
-    setBarInfo(prop);
-  };
 
   useEffect(() => {
-    // 1 - offsetX
-    // 2 - offsetY
-    // 3 - spread
-    // 4 - blur
-    // 5 - opacity
-    const range = parseInt(Math.abs(min) + max);
+    const { width } = bar.current.getBoundingClientRect();
+    const range = Math.abs(min) + max;
+    setSliderPosition(((width - 30) / range) * (min < 0 ? 100 + value : value));
+  }, [value, min, max]);
 
-    if (!list[activeId]) {
-      changeActiveId(Object.keys(list)[0]);
-      return;
-    }
-
-    switch (index) {
-      case 1:
-        updateBar(list[activeId].x, range);
-        break;
-
-      case 2:
-        updateBar(list[activeId].y, range);
-        break;
-
-      case 3:
-        updateBar(list[activeId].s, range);
-        break;
-
-      case 4:
-        updateBar(list[activeId].b, range);
-        break;
-
-      case 5:
-        updateBar(list[activeId].color.a * 100, range);
-        break;
-
-      default:
-        throw new Error("Incorrect index number");
-    }
-  }, [activeId, size, min, max, index, changeActiveId]);
-
+  // !refactor required
   const handlePositionChange = (e) => {
     const { width, left } = bar.current.getBoundingClientRect();
 
@@ -101,14 +27,12 @@ const Slider = ({
     } else if (positionX < -2) {
       positionX = -2;
     }
-    setSliderPosition(positionX);
-    setInnerBarWidth(positionX + 5);
-
     updateBarInfo(width, left, e);
   };
 
+  // !refactor required
   const updateBarInfo = (width, left, e) => {
-    const base = (Math.abs(min) + max) / (width - 30);
+    const base = (Math.abs(min) + max) / (width - 15);
     let info;
 
     if (min === 0) {
@@ -122,47 +46,11 @@ const Slider = ({
     if (info > max) info = max;
     else if (info < min) info = min;
 
-    setBarInfo(info);
-    updateBoxShadow(info);
+    onChange(info);
   };
 
-  const updateBoxShadow = (offset) => {
-    // 1 - offsetX
-    // 2 - offsetY
-    // 3 - spread
-    // 4 - blur
-    // 5 - opacity
-
-    switch (index) {
-      case 1:
-        setOffsetX(offset, activeId);
-        break;
-
-      case 2:
-        setOffsetY(offset, activeId);
-        break;
-
-      case 3:
-        setSpread(offset, activeId);
-        break;
-
-      case 4:
-        setBlur(offset, activeId);
-        break;
-
-      case 5:
-        const { r, g, b } = list[activeId].color;
-        setShadowColor(activeId, { r, g, b, a: offset / 100 });
-        break;
-
-      default:
-        throw new Error("Incorrect index number");
-    }
-  };
-  // slider part
   const startDrag = (e) => {
     e.preventDefault();
-
     document.addEventListener("mousemove", handlePositionChange);
     document.addEventListener("mouseup", stopDrag);
   };
@@ -176,13 +64,36 @@ const Slider = ({
     <Wrapper>
       <Label>{text.toUpperCase()}</Label>
       <OptionBar ref={bar}>
-        <InnerBar width={innerBarWidth} />
+        <InnerBar width={sliderPosition + 5} />
         <Draggable position={sliderPosition} onMouseDown={startDrag}>
-          {barInfo}
+          {value}
         </Draggable>
       </OptionBar>
     </Wrapper>
   );
+};
+
+Slider.propTypes = {
+  /**
+   * Optional - slider description
+   */
+  text: PropTypes.string,
+  /**
+   * Required - smallest possible input
+   */
+  min: PropTypes.number.isRequired,
+  /**
+   * Required - biggest possible input
+   */
+  max: PropTypes.number.isRequired,
+  /**
+   * Required - callback which is called on value change
+   */
+  onChange: PropTypes.func.isRequired,
+  /**
+   * Required - piece of state which tracks the value
+   */
+  value: PropTypes.number.isRequired,
 };
 
 const Wrapper = styled.div`
@@ -243,18 +154,4 @@ const Label = styled.p`
   user-select: none;
 `;
 
-const mapStateToProps = (state) => {
-  return {
-    activeId: state.activeId,
-    list: state.boxShadowList,
-  };
-};
-
-export default connect(mapStateToProps, {
-  setOffsetX,
-  setOffsetY,
-  setSpread,
-  setBlur,
-  setShadowColor,
-  changeActiveId,
-})(Slider);
+export default Slider;

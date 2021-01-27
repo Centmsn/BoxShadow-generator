@@ -75,14 +75,14 @@ export const setBlur = (blur, id) => {
   };
 };
 
-export const setInset = (id, isInset) => {
+export const setInset = (isInset, id) => {
   return {
     type: SETINSET,
     payload: { id, isInset },
   };
 };
 
-export const setShadowColor = (id, color) => {
+export const setShadowColor = (color, id) => {
   return {
     type: SETSHADOWCOLOR,
     payload: { id, color },
