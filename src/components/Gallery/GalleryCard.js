@@ -41,12 +41,12 @@ const GalleryCard = ({ preset, setList, setVisibility, changeActiveId }) => {
 
         <Button
           text={"Confirm"}
-          callback={handlePresetDisplay}
+          onClick={handlePresetDisplay}
           color={`rgb(0, 130, 0)`}
         />
         <Button
           text={"Cancel"}
-          callback={() => setIsModalVisible(false)}
+          onClick={() => setIsModalVisible(false)}
           color={`rgb(150, 0, 0)`}
         />
       </Modal>

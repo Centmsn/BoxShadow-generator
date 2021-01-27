@@ -8,6 +8,10 @@ import Options from "./Options/Options";
 import Preview from "./Preview/Preview";
 import Theme from "../Theme";
 
+/**
+ * Functional React component - main app components, contains all other components
+ * @returns {JSX.Element}
+ */
 const App = () => {
   useEffect(() => {
     window.addEventListener("beforeunload", displayAlert);

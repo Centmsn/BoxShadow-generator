@@ -85,6 +85,7 @@ const PreviewSettings = ({
       example.r === 175 &&
       example.g === 193 &&
       example.b === 222 &&
+      radius === 0 &&
       !resetError
     ) {
       setResetError("Already using default values");
@@ -96,6 +97,7 @@ const PreviewSettings = ({
 
     setBgCol(255, 255, 255);
     setBoxCol(175, 193, 222);
+    setBoxRadius(0);
   };
 
   const handleRadiusChange = (e) => {

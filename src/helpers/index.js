@@ -1,5 +1,5 @@
 /**
- * Generates box-shadow CSS property code.
+ * Generates box-shadow CSS property code in RGBA color format.
  * @param {Object[]} list
  * @param {boolean} list.inset - box-shadow inset property
  * @param {number} list.x - box-shadow offsetX property
