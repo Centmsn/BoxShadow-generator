@@ -1,6 +1,7 @@
 import {
   SETBGCOL,
   SETEXAMPLECOL,
+  SETEXAMPLERADIUS,
   ADDBOXSHADOW,
   REMOVEBOXSHADOW,
   CHANGEACTIVEID,
@@ -24,6 +25,13 @@ export const setBoxCol = (r, g, b) => {
   return {
     type: SETEXAMPLECOL,
     payload: { r, g, b },
+  };
+};
+
+export const setBoxRadius = (radius) => {
+  return {
+    type: SETEXAMPLERADIUS,
+    payload: radius,
   };
 };
 

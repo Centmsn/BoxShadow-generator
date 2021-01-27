@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect } from "react";
 
-import CodeOutput from "./CodeOutput";
+import CodeOutput from "./Output/CodeOutput";
 import GlobalStyle from "../GlobalStyles";
 import List from "./List/List";
 import Options from "./Options/Options";

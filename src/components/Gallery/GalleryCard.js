@@ -6,9 +6,9 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import { setList, changeActiveId } from "../../actions";
-import Button from "../Button";
+import Button from "../Shared/Button";
 import { generateCode } from "../../helpers";
-import Modal from "../Modal";
+import Modal from "../Shared/Modal";
 
 const GalleryCard = ({ preset, setList, setVisibility, changeActiveId }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);

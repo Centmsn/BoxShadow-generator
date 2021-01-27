@@ -13,50 +13,37 @@ const Slider = ({ text, min, max, onChange, value }) => {
   useEffect(() => {
     const { width } = bar.current.getBoundingClientRect();
     const range = Math.abs(min) + max;
-    setSliderPosition(((width - 30) / range) * (min < 0 ? 100 + value : value));
+    setSliderPosition(
+      ((width - 30) / range) * (min < 0 ? 100 + value : value) - 2
+    );
   }, [value, min, max]);
 
-  // !refactor required
-  const handlePositionChange = (e) => {
+  const updateBarInfo = (e) => {
     const { width, left } = bar.current.getBoundingClientRect();
-
-    let positionX = e.clientX - left - 15;
-
-    if (positionX > width - 30) {
-      positionX = width - 30;
-    } else if (positionX < -2) {
-      positionX = -2;
-    }
-    updateBarInfo(width, left, e);
-  };
-
-  // !refactor required
-  const updateBarInfo = (width, left, e) => {
     const base = (Math.abs(min) + max) / (width - 15);
-    let info;
+    let value;
 
     if (min === 0) {
-      info = Math.floor((e.clientX - left) * base);
+      value = Math.floor((e.clientX - left) * base);
     } else {
       const middle = width / 2;
-
-      info = Math.floor((e.clientX - left - middle) * base);
+      value = Math.floor((e.clientX - left - middle) * base);
     }
 
-    if (info > max) info = max;
-    else if (info < min) info = min;
+    if (value > max) value = max;
+    else if (value < min) value = min;
 
-    onChange(info);
+    onChange(value);
   };
 
   const startDrag = (e) => {
     e.preventDefault();
-    document.addEventListener("mousemove", handlePositionChange);
+    document.addEventListener("mousemove", updateBarInfo);
     document.addEventListener("mouseup", stopDrag);
   };
 
   const stopDrag = () => {
-    document.removeEventListener("mousemove", handlePositionChange);
+    document.removeEventListener("mousemove", updateBarInfo);
     document.removeEventListener("mouseup", stopDrag);
   };
 

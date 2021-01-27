@@ -5,16 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useState } from "react";
 
-import Container from "../Container";
-import { setBgCol, setBoxCol } from "../../actions";
+import Container from "../Shared/Container";
+import { setBgCol, setBoxCol, setBoxRadius } from "../../actions";
+import { validateNumberInput } from "../../helpers";
 
 const PreviewSettings = ({
   visibility,
   setVisibility,
   setBgCol,
   setBoxCol,
+  setBoxRadius,
   bg,
   example,
+  radius,
 }) => {
   const [colorError, setColorError] = useState({});
   const [resetError, setResetError] = useState("");
@@ -23,25 +26,14 @@ const PreviewSettings = ({
     // 1 - R
     // 2 - G
     // 3 - B
+    const { error, value } = validateNumberInput(0, 255, e.target.value);
 
-    let val = e.target.value;
+    if (error && !Object.keys(colorError).length) {
+      setColorError({ type, index, error });
 
-    // validate input
-    if (!val) {
-      val = 0;
-    } else if (val > 255) {
-      val = 255;
-      if (Object.entries(colorError).length === 0) {
-        setColorError({ type, index });
-
-        setTimeout(() => {
-          setColorError({});
-        }, 3500);
-      }
-    } else if (val.match(/^0{2,}/)) {
-      val = val.slice(0, 1);
-    } else if (val.match(/^0\d/)) {
-      val = val.slice(1);
+      setTimeout(() => {
+        setColorError({});
+      }, 3500);
     }
 
     if (type === "box") {
@@ -49,15 +41,15 @@ const PreviewSettings = ({
 
       switch (index) {
         case 1:
-          setBoxCol(val, g, b);
+          setBoxCol(value, g, b);
           break;
 
         case 2:
-          setBoxCol(r, val, b);
+          setBoxCol(r, value, b);
           break;
 
         case 3:
-          setBoxCol(r, g, val);
+          setBoxCol(r, g, value);
           break;
 
         default:
@@ -68,15 +60,15 @@ const PreviewSettings = ({
 
       switch (index) {
         case 1:
-          setBgCol(val, g, b);
+          setBgCol(value, g, b);
           break;
 
         case 2:
-          setBgCol(r, val, b);
+          setBgCol(r, value, b);
           break;
 
         case 3:
-          setBgCol(r, g, val);
+          setBgCol(r, g, value);
           break;
 
         default:
@@ -106,9 +98,13 @@ const PreviewSettings = ({
     setBoxCol(175, 193, 222);
   };
 
-  const boxTooltip = colorError.type === "box" ? "Range is 0-255" : null;
-  const bgTooltip = colorError.type === "bg" ? "Range is 0-255" : null;
+  const handleRadiusChange = (e) => {
+    // TODO: add error handling
+    const { error, value } = validateNumberInput(0, 100, e.target.value);
+    setBoxRadius(value);
+  };
 
+  // TODO refactor required
   return (
     <>
       <Nav active={visibility}>
@@ -121,46 +117,34 @@ const PreviewSettings = ({
 
           <label>
             R
-            <ColorInput
+            <Input
               value={example.r}
               onChange={(e) => handleBoxColorChange(e, 1, "box")}
               type="number"
-              error={
-                colorError.type === "box" && colorError.index === 1
-                  ? true
-                  : false
-              }
+              error={colorError.type === "box" && colorError.index === 1}
             />
           </label>
 
           <label>
             G
-            <ColorInput
+            <Input
               value={example.g}
               onChange={(e) => handleBoxColorChange(e, 2, "box")}
               type="number"
-              error={
-                colorError.type === "box" && colorError.index === 2
-                  ? true
-                  : false
-              }
+              error={colorError.type === "box" && colorError.index === 2}
             />
           </label>
 
           <label>
             B
-            <ColorInput
+            <Input
               value={example.b}
               onChange={(e) => handleBoxColorChange(e, 3, "box")}
               type="number"
-              error={
-                colorError.type === "box" && colorError.index === 3
-                  ? true
-                  : false
-              }
+              error={colorError.type === "box" && colorError.index === 3}
             />
           </label>
-          <Tooltip>{boxTooltip}</Tooltip>
+          <Tooltip>{colorError.type === "box" && colorError.error}</Tooltip>
         </Section>
 
         <Section>
@@ -168,46 +152,45 @@ const PreviewSettings = ({
 
           <label>
             R
-            <ColorInput
+            <Input
               value={bg.r}
               onChange={(e) => handleBoxColorChange(e, 1, "bg")}
               type="number"
-              error={
-                colorError.type === "bg" && colorError.index === 1
-                  ? true
-                  : false
-              }
+              error={colorError.type === "bg" && colorError.index === 1}
             />
           </label>
 
           <label>
             G
-            <ColorInput
+            <Input
               value={bg.g}
               onChange={(e) => handleBoxColorChange(e, 2, "bg")}
               type="number"
-              error={
-                colorError.type === "bg" && colorError.index === 2
-                  ? true
-                  : false
-              }
+              error={colorError.type === "bg" && colorError.index === 2}
             />
           </label>
 
           <label>
             B
-            <ColorInput
+            <Input
               value={bg.b}
               onChange={(e) => handleBoxColorChange(e, 3, "bg")}
               type="number"
-              error={
-                colorError.type === "bg" && colorError.index === 3
-                  ? true
-                  : false
-              }
+              error={colorError.type === "bg" && colorError.index === 3}
             />
           </label>
-          <Tooltip>{bgTooltip}</Tooltip>
+
+          <Tooltip>{colorError.type === "bg" && colorError.error}</Tooltip>
+        </Section>
+
+        <Section>
+          <h2>Border radius</h2>
+
+          <label>
+            Radius
+            <Input value={radius} onChange={handleRadiusChange} type="number" />
+            %
+          </label>
         </Section>
 
         <Section>
@@ -227,6 +210,8 @@ const Nav = styled.div.attrs((props) => ({
     color: props.active ? props.theme.lightBlue : null,
   },
 }))`
+  display: flex;
+  align-items: center;
   color: white;
 
   cursor: pointer;
@@ -255,8 +240,8 @@ const Nav = styled.div.attrs((props) => ({
   }
 `;
 
-const ColorInput = styled.input`
-  width: 35px;
+const Input = styled.input`
+  width: 30px;
   margin-left: 5px;
 
   border-bottom: 2px solid
@@ -314,11 +299,11 @@ const Tooltip = styled.p`
 `;
 
 const mapStateToProps = (state) => {
-  const { bg, example } = state.preview;
+  const { bg, example, radius } = state.preview;
 
-  return { bg, example };
+  return { bg, example, radius };
 };
 
-export default connect(mapStateToProps, { setBoxCol, setBgCol })(
+export default connect(mapStateToProps, { setBoxCol, setBgCol, setBoxRadius })(
   PreviewSettings
 );

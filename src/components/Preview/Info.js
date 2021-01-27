@@ -2,7 +2,7 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-import Container from "../Container";
+import Container from "../Shared/Container";
 
 const Info = ({ visibility, setVisibility }) => {
   return (
@@ -50,6 +50,8 @@ const Nav = styled.div.attrs((props) => ({
   },
 }))`
   margin-left: 15px;
+  display: flex;
+  align-items: center;
   color: white;
 
   cursor: pointer;

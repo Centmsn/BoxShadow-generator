@@ -8,7 +8,7 @@ import { generateCode } from "../../helpers";
 import Info from "./Info";
 import PreviewSettings from "./PreviewSettings";
 
-const Preview = ({ bg, example, list }) => {
+const Preview = ({ bg, example, radius, list }) => {
   const [settingsVisibility, setSettingsVisibility] = useState(false);
   const [galleryVisibility, setGalleryVisibility] = useState(false);
   const [infoVisibility, setInfoVisibility] = useState(false);
@@ -57,6 +57,7 @@ const Preview = ({ bg, example, list }) => {
         r={example.r}
         g={example.g}
         b={example.b}
+        radius={radius}
         code={generateCode(list)}
       />
     </Wrapper>
@@ -88,18 +89,17 @@ const OptionBar = styled.div`
   font-size: 3rem;
 
   background-color: ${({ theme }) => theme.colors.darkBlue};
-
-  padding-top: 5px;
-  padding-right: 5px;
+  padding-right: 10px;
 `;
 
 const mapStateToProps = (state) => {
-  const { bg, example } = state.preview;
+  const { bg, example, radius } = state.preview;
 
   return {
     list: state.boxShadowList,
     bg,
     example,
+    radius,
   };
 };
 

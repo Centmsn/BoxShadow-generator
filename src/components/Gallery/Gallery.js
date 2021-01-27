@@ -2,7 +2,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-import Container from "../Container";
+import Container from "../Shared/Container";
 import GalleryCard from "./GalleryCard";
 import presets from "./presets";
 
@@ -34,6 +34,8 @@ const Nav = styled.div.attrs((props) => ({
   style: { color: props.active ? props.theme.lightBlue : null },
 }))`
   margin-right: 15px;
+  display: flex;
+  align-items: center;
 
   color: white;
   cursor: pointer;

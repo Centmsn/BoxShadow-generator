@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const DisplayResult = ({ r, g, b, code }) => {
-  return <ExampleBox r={r} g={g} b={b} code={code}></ExampleBox>;
+const DisplayResult = ({ r, g, b, radius, code }) => {
+  return <ExampleBox r={r} g={g} b={b} code={code} radius={radius} />;
 };
 
 const ExampleBox = styled.div.attrs((props) => ({
@@ -13,6 +13,7 @@ const ExampleBox = styled.div.attrs((props) => ({
   height: 200px;
 
   background-color: ${({ r, g, b }) => `rgb(${r}, ${g}, ${b})`};
+  border-radius: ${({ radius }) => radius}%;
 `;
 
 export default DisplayResult;

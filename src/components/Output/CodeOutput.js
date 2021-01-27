@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useState } from "react";
 
-import { generateCode } from "../helpers";
+import { generateCode } from "../../helpers";
 
 const CodeOutput = ({ list }) => {
   const [infoVisibility, setInfoVisibility] = useState(false);
