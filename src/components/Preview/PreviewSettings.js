@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { faEraser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,20 +6,18 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import Container from "../Shared/Container";
-// import { setBgCol, setBoxCol, setBoxRadius } from "../../state";
 import { validateNumberInput } from "../../helpers";
 import { useActions } from "../../hooks/useActions";
 
-const PreviewSettings = ({
-  visibility,
-  setVisibility,
-
-  bg,
-  example,
-  radius,
-}) => {
+const PreviewSettings = ({ visibility, setVisibility }) => {
+  // local state
   const [colorError, setColorError] = useState({});
   const [resetError, setResetError] = useState("");
+
+  // redux state
+  const radius = useSelector((state) => state.preview.radius);
+  const bg = useSelector((state) => state.preview.radius);
+  const example = useSelector((state) => state.preview.radius);
   const { setBgCol, setBoxCol, setBoxRadius } = useActions();
 
   const handleBoxColorChange = (e, index, type) => {
@@ -300,10 +298,4 @@ const Tooltip = styled.p`
   color: ${({ theme }) => theme.colors.lightGray};
 `;
 
-const mapStateToProps = (state) => {
-  const { bg, example, radius } = state.preview;
-
-  return { bg, example, radius };
-};
-
-export default connect(mapStateToProps, {})(PreviewSettings);
+export default PreviewSettings;
