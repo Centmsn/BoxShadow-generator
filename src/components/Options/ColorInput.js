@@ -4,7 +4,13 @@ import styled from "styled-components";
 import { convertHexToRgb, convertRgbToHex, throttle } from "../../helpers";
 import { useState, useEffect } from "react";
 
-const ColorInput = ({ description = "", onChange, value = "#000000" }) => {
+/**
+ * Functional React component - renders HTML color input with provided description
+ * @function
+ * @param {object} props - react props
+ * @returns {JSX.Element}
+ */
+const ColorInput = ({ description, onChange, value }) => {
   const [color, setColor] = useState("#000000");
 
   useEffect(() => {
@@ -31,13 +37,29 @@ const ColorInput = ({ description = "", onChange, value = "#000000" }) => {
 };
 
 ColorInput.propTypes = {
+  /**
+   * Input description
+   */
   description: PropTypes.string,
+
+  /**
+   * A function which is called on every color change
+   */
   onChange: PropTypes.func.isRequired,
+
+  /**
+   * RGB color value
+   */
   value: PropTypes.shape({
     r: PropTypes.number,
     g: PropTypes.number,
     b: PropTypes.number,
   }).isRequired,
+};
+
+ColorInput.defaultProps = {
+  description: "",
+  value: "#000000",
 };
 
 const Wrapper = styled.div`

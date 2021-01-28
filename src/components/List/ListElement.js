@@ -3,20 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useRef, useState } from "react";
+import { useActions } from "../../hooks/useActions";
 
-import { removeBoxShadow, changeActiveId } from "../../state";
+// import { removeBoxShadow, changeActiveId } from "../../state";
 
-const ListElement = ({
-  list,
-  listNum,
-  id,
-  color,
-  activeId,
-  removeBoxShadow,
-  changeActiveId,
-}) => {
+const ListElement = ({ list, listNum, id, color, activeId }) => {
   const [listError, setListError] = useState("");
   const listItem = useRef(null);
+  const { removeBoxShadow, changeActiveId } = useActions;
 
   const handleRemoveListItem = () => {
     const keys = Object.keys(list).map((key) => +key);
@@ -157,6 +151,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { removeBoxShadow, changeActiveId })(
-  ListElement
-);
+export default connect(mapStateToProps, {})(ListElement);

@@ -5,13 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useState } from "react";
 
-import { setList, changeActiveId } from "../../state";
+// import { setList, changeActiveId } from "../../state";
 import Button from "../Shared/Button";
 import { generateCode } from "../../helpers";
 import Modal from "../Shared/Modal";
+import { useActions } from "../../hooks/useActions";
 
-const GalleryCard = ({ preset, setList, setVisibility, changeActiveId }) => {
+const GalleryCard = ({ preset, setVisibility }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { changeActiveId, setList } = useActions;
 
   const handlePresetDisplay = () => {
     setList(_.omit(preset, "position"));
@@ -121,4 +123,4 @@ const ModalIcon = styled.div`
   font-size: 4rem;
 `;
 
-export default connect(null, { setList, changeActiveId })(GalleryCard);
+export default connect(null, {})(GalleryCard);

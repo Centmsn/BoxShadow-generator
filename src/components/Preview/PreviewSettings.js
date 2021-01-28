@@ -6,21 +6,21 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import Container from "../Shared/Container";
-import { setBgCol, setBoxCol, setBoxRadius } from "../../state";
+// import { setBgCol, setBoxCol, setBoxRadius } from "../../state";
 import { validateNumberInput } from "../../helpers";
+import { useActions } from "../../hooks/useActions";
 
 const PreviewSettings = ({
   visibility,
   setVisibility,
-  setBgCol,
-  setBoxCol,
-  setBoxRadius,
+
   bg,
   example,
   radius,
 }) => {
   const [colorError, setColorError] = useState({});
   const [resetError, setResetError] = useState("");
+  const { setBgCol, setBoxCol, setBoxRadius } = useActions();
 
   const handleBoxColorChange = (e, index, type) => {
     // 1 - R
@@ -306,6 +306,4 @@ const mapStateToProps = (state) => {
   return { bg, example, radius };
 };
 
-export default connect(mapStateToProps, { setBoxCol, setBgCol, setBoxRadius })(
-  PreviewSettings
-);
+export default connect(mapStateToProps, {})(PreviewSettings);

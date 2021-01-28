@@ -6,7 +6,11 @@ import styled from "styled-components";
 
 import { useState, useEffect } from "react";
 
-const Checkbox = ({ description = "", onClick, initialValue = false }) => {
+/**
+ * Functional React component - renders custom checkbox on the screen
+ * @returns {JSX.Element}
+ */
+const Checkbox = ({ description, onClick, initialValue }) => {
   const [checkboxState, setCheckboxState] = useState(false);
 
   useEffect(() => {
@@ -14,6 +18,10 @@ const Checkbox = ({ description = "", onClick, initialValue = false }) => {
     setCheckboxState(initialValue);
   }, [initialValue]);
 
+  /**
+   * Toggles checkbox and calls onClick callback provided to the component
+   * @return {undefined}
+   */
   const toggleCheckbox = () => {
     setCheckboxState((prev) => !prev);
     // pass current state to callback
@@ -31,9 +39,25 @@ const Checkbox = ({ description = "", onClick, initialValue = false }) => {
 };
 
 Checkbox.propTypes = {
+  /**
+   * Check box description
+   */
   description: PropTypes.string,
+
+  /**
+   * A function which is called on checkbox click
+   */
   onClick: PropTypes.func.isRequired,
+
+  /**
+   * Initial value. True - checked.
+   */
   initialValue: PropTypes.bool,
+};
+
+Checkbox.defaultProps = {
+  description: "",
+  initialValue: false,
 };
 
 const Wrapper = styled.div`

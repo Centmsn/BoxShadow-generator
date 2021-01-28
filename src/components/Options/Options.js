@@ -1,55 +1,50 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import Bar from "./Slider";
 import Checkbox from "./Checkbox";
 import ColorInput from "./ColorInput";
-import {
-  setInset,
-  setShadowColor,
-  setOffsetX,
-  setOffsetY,
-  setSpread,
-  setBlur,
-} from "../../state";
+import { useActions } from "../../hooks/useActions";
 
-const Options = ({
-  setInset,
-  setShadowColor,
-  setOffsetX,
-  setOffsetY,
-  setSpread,
-  setBlur,
-  activeId,
-  list,
-}) => {
+const Options = () => {
+  const activeID = useSelector((state) => state.activeId);
+  const boxShadowList = useSelector((state) => state.boxShadowList);
+  const {
+    setInset,
+    setShadowColor,
+    setOffsetX,
+    setOffsetY,
+    setBlur,
+    setSpread,
+  } = useActions();
+
   const handleInset = (value) => {
-    setInset(value, activeId);
+    setInset(value, activeID);
   };
 
   const handleColor = (color) => {
-    setShadowColor(color, activeId);
+    setShadowColor(color, activeID);
   };
 
   const handleOffsetX = (value) => {
-    setOffsetX(value, activeId);
+    setOffsetX(value, activeID);
   };
 
   const handleOffsetY = (value) => {
-    setOffsetY(value, activeId);
+    setOffsetY(value, activeID);
   };
 
   const handleSpread = (value) => {
-    setSpread(value, activeId);
+    setSpread(value, activeID);
   };
 
   const handleBlur = (value) => {
-    setBlur(value, activeId);
+    setBlur(value, activeID);
   };
 
   const handleShadow = (value) => {
-    const { r, g, b } = list[activeId].color;
-    setShadowColor({ r, g, b, a: value / 100 }, activeId);
+    const { r, g, b } = boxShadowList[activeID].color;
+    setShadowColor({ r, g, b, a: value / 100 }, activeID);
   };
 
   const randerSliders = () => {
@@ -59,35 +54,35 @@ const Options = ({
         min: -100,
         max: 100,
         callback: handleOffsetX,
-        value: list[activeId].x,
+        value: boxShadowList[activeID].x,
       },
       {
         name: "offset y",
         min: -100,
         max: 100,
         callback: handleOffsetY,
-        value: list[activeId].y,
+        value: boxShadowList[activeID].y,
       },
       {
         name: "spread",
         min: -100,
         max: 100,
         callback: handleSpread,
-        value: list[activeId].s,
+        value: boxShadowList[activeID].s,
       },
       {
         name: "blur",
         min: 0,
         max: 100,
         callback: handleBlur,
-        value: list[activeId].b,
+        value: boxShadowList[activeID].b,
       },
       {
         name: "opacity",
         min: 0,
         max: 100,
         callback: handleShadow,
-        value: Math.floor(list[activeId].color.a * 100),
+        value: Math.floor(boxShadowList[activeID].color.a * 100),
       },
     ];
 
@@ -114,13 +109,13 @@ const Options = ({
         <ColorInput
           description="shadow color"
           onChange={handleColor}
-          value={list[activeId].color}
+          value={boxShadowList[activeID].color}
         />
 
         <Checkbox
           description="inset"
           onClick={handleInset}
-          initialValue={list[activeId].inset}
+          initialValue={boxShadowList[activeID].inset}
         />
       </SubContainer>
     </Wrapper>
@@ -152,18 +147,4 @@ const SubContainer = styled.div`
   padding: 5px;
 `;
 
-const mapStateToProps = (state) => {
-  return {
-    activeId: state.activeId,
-    list: state.boxShadowList,
-  };
-};
-
-export default connect(mapStateToProps, {
-  setOffsetX,
-  setOffsetY,
-  setSpread,
-  setBlur,
-  setInset,
-  setShadowColor,
-})(Options);
+export default Options;

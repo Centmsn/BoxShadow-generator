@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 import ListElement from "./ListElement";
-import { addBoxShadow } from "../../state";
+import { useActions } from "../../hooks/useActions";
+// import { addBoxShadow } from "../../state";
 
-const List = ({ addBoxShadow, list }) => {
+const List = ({ list }) => {
+  const { addBoxShadow } = useActions;
   const handleBoxShadowAdd = () => {
     addBoxShadow();
   };
@@ -92,4 +94,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addBoxShadow })(List);
+export default connect(mapStateToProps, {})(List);
