@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-import Bar from "./Slider";
-import Checkbox from "./Checkbox";
-import ColorInput from "./ColorInput";
-import { useActions } from "../../hooks/useActions";
+import Bar from "modules/Options/components/Slider";
+import Checkbox from "modules/Options/components/Checkbox";
+import ColorInput from "modules/Options/components/ColorInput";
+import { useActions } from "hooks/useActions";
 
 const Options = () => {
   const activeID = useSelector((state) => state.activeId);

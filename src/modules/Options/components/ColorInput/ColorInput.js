@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { convertHexToRgb, convertRgbToHex, throttle } from "../../helpers";
+import { convertHexToRgb, convertRgbToHex, throttle } from "helpers";
 import { useState, useEffect } from "react";
 
 /**

@@ -1,19 +1,17 @@
 import _ from "lodash";
-import { connect } from "react-redux";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useState } from "react";
 
-// import { setList, changeActiveId } from "../../state";
-import Button from "../Shared/Button";
-import { generateCode } from "../../helpers";
-import Modal from "../Shared/Modal";
-import { useActions } from "../../hooks/useActions";
+import Button from "modules/Shared/Button";
+import { generateCode } from "helpers";
+import Modal from "modules/Shared/Modal";
+import { useActions } from "hooks/useActions";
 
 const GalleryCard = ({ preset, setVisibility }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { changeActiveId, setList } = useActions;
+  const { changeActiveId, setList } = useActions();
 
   const handlePresetDisplay = () => {
     setList(_.omit(preset, "position"));
@@ -123,4 +121,4 @@ const ModalIcon = styled.div`
   font-size: 4rem;
 `;
 
-export default connect(null, {})(GalleryCard);
+export default GalleryCard;

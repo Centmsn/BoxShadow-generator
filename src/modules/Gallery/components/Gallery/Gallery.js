@@ -2,15 +2,15 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-import Container from "../Shared/Container";
-import GalleryCard from "./GalleryCard";
-import presets from "./presets";
+import Container from "../../../Shared/Container";
+import GalleryCard from "../Card/GalleryCard";
+import { PRESETS } from "consts";
 
 const Gallery = ({ visibility, setVisibility }) => {
   const renderCards = () => {
     const cards = [];
-    for (let i = 0; i < presets.length; i++) {
-      const preset = JSON.parse(JSON.stringify(presets[i]));
+    for (let i = 0; i < PRESETS.length; i++) {
+      const preset = JSON.parse(JSON.stringify(PRESETS[i]));
       cards.push(
         <GalleryCard preset={preset} setVisibility={setVisibility} key={i} />
       );

@@ -2,11 +2,11 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { useState } from "react";
 
-import DisplayResult from "./DisplayResult";
-import Gallery from "../Gallery/Gallery";
-import { generateCode } from "../../helpers";
-import Info from "./Info";
-import PreviewSettings from "./PreviewSettings";
+import VisualOutput from "modules/Preview/components/VisualOutput";
+import Gallery from "modules/Gallery/components/Gallery";
+import { generateCode } from "helpers";
+import Info from "modules/Preview/components/Info";
+import Settings from "modules/Preview/components/Settings";
 
 const Preview = ({ bg, example, radius, list }) => {
   const [settingsVisibility, setSettingsVisibility] = useState(false);
@@ -44,7 +44,7 @@ const Preview = ({ bg, example, radius, list }) => {
           visibility={galleryVisibility}
           setVisibility={() => toggleVisibility(0)}
         />
-        <PreviewSettings
+        <Settings
           visibility={settingsVisibility}
           setVisibility={() => toggleVisibility(1)}
         />
@@ -53,7 +53,7 @@ const Preview = ({ bg, example, radius, list }) => {
           setVisibility={() => toggleVisibility(2)}
         />
       </OptionBar>
-      <DisplayResult
+      <VisualOutput
         r={example.r}
         g={example.g}
         b={example.b}

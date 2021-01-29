@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useRef, useState } from "react";
-import { useActions } from "../../hooks/useActions";
 
-// import { removeBoxShadow, changeActiveId } from "../../state";
+import { useActions } from "hooks/useActions";
 
+//TODO add default props, disconnect from redux
 const ListElement = ({ list, listNum, id, color, activeId }) => {
   const [listError, setListError] = useState("");
   const listItem = useRef(null);

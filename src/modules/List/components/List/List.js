@@ -3,9 +3,8 @@ import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-import ListElement from "./ListElement";
-import { useActions } from "../../hooks/useActions";
-// import { addBoxShadow } from "../../state";
+import ListElement from "modules/List/components/ListElement";
+import { useActions } from "hooks/useActions";
 
 const List = ({ list }) => {
   const { addBoxShadow } = useActions;

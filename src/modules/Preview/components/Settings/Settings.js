@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useState } from "react";
 
-import Container from "../Shared/Container";
-import { validateNumberInput } from "../../helpers";
-import { useActions } from "../../hooks/useActions";
+import Container from "modules/Shared/Container";
+import { validateNumberInput } from "helpers";
+import { useActions } from "hooks/useActions";
 
-const PreviewSettings = ({ visibility, setVisibility }) => {
+const Settings = ({ visibility, setVisibility }) => {
   // local state
   const [colorError, setColorError] = useState({});
   const [resetError, setResetError] = useState("");
@@ -298,4 +298,4 @@ const Tooltip = styled.p`
   color: ${({ theme }) => theme.colors.lightGray};
 `;
 
-export default PreviewSettings;
+export default Settings;

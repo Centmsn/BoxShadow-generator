@@ -1,4 +1,4 @@
-const presets = [
+const PRESETS = [
   {
     position: "center",
     0: { x: 0, y: 0, b: 6, s: 12, color: { r: 92, g: 245, b: 158, a: 1 } },
@@ -527,4 +527,4 @@ const presets = [
   },
 ];
 
-export default presets;
+export { PRESETS };
