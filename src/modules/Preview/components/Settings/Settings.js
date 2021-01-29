@@ -16,8 +16,8 @@ const Settings = ({ visibility, setVisibility }) => {
 
   // redux state
   const radius = useSelector((state) => state.preview.radius);
-  const bg = useSelector((state) => state.preview.radius);
-  const example = useSelector((state) => state.preview.radius);
+  const bg = useSelector((state) => state.preview.bg);
+  const example = useSelector((state) => state.preview.example);
   const { setBgCol, setBoxCol, setBoxRadius } = useActions();
 
   const handleBoxColorChange = (e, index, type) => {

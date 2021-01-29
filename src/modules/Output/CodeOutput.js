@@ -6,20 +6,23 @@ import { useState } from "react";
 
 import { generateCode } from "helpers";
 
+const copyCode = (code) => {
+  const el = document.createElement("textarea");
+  el.value = code;
+  el.setAttribute("readonly", "");
+  el.style = { position: "absolute", left: "-9999px" };
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand("copy");
+  document.body.removeChild(el);
+};
+
 const CodeOutput = ({ list }) => {
   const [infoVisibility, setInfoVisibility] = useState(false);
   const code = `box-shadow: ${generateCode(list)}`;
 
   const handleCopyCode = () => {
-    // *Move to helpers?
-    const el = document.createElement("textarea");
-    el.value = code;
-    el.setAttribute("readonly", "");
-    el.style = { position: "absolute", left: "-9999px" };
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand("copy");
-    document.body.removeChild(el);
+    copyCode(code);
 
     if (!infoVisibility) {
       setInfoVisibility(true);

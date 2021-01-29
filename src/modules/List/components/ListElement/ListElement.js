@@ -10,7 +10,7 @@ import { useActions } from "hooks/useActions";
 const ListElement = ({ list, listNum, id, color, activeId }) => {
   const [listError, setListError] = useState("");
   const listItem = useRef(null);
-  const { removeBoxShadow, changeActiveId } = useActions;
+  const { removeBoxShadow, changeActiveId } = useActions();
 
   const handleRemoveListItem = () => {
     const keys = Object.keys(list).map((key) => +key);
