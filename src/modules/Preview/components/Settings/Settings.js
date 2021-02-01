@@ -101,6 +101,7 @@ const Settings = ({ visibility, setVisibility }) => {
             onChange={(e) => handleBoxColorChange(e, index, el.label, el.name)}
             name={el.name}
             error={inputErrors.name === el.name && inputErrors.index === index}
+            autoComplete="false"
           />
         </label>
       );
@@ -139,6 +140,7 @@ const Settings = ({ visibility, setVisibility }) => {
               value={radius}
               onChange={handleRadiusChange}
               error={inputErrors.name === "radius"}
+              autoComplete="false"
             />
             %
           </label>

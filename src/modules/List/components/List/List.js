@@ -7,7 +7,7 @@ import ListElement from "modules/List/components/ListElement";
 import { useActions } from "hooks/useActions";
 
 const List = ({ list }) => {
-  const { addBoxShadow } = useActions;
+  const { addBoxShadow } = useActions();
   const handleBoxShadowAdd = () => {
     addBoxShadow();
   };
