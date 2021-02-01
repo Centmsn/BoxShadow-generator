@@ -108,6 +108,11 @@ export const validateNumberInput = (min, max, current) => {
   let error;
   let value = current;
 
+  if (Number.isNaN(current * 1)) {
+    error = "Use numbers only";
+    return { error, value: min };
+  }
+
   // validate input
   if (!value) {
     value = 0;
@@ -122,5 +127,5 @@ export const validateNumberInput = (min, max, current) => {
     value = value.slice(1);
   }
 
-  return { error, value };
+  return { error, value: +value };
 };

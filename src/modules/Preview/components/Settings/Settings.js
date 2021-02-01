@@ -11,75 +11,55 @@ import { useActions } from "hooks/useActions";
 
 const Settings = ({ visibility, setVisibility }) => {
   // local state
-  const [colorError, setColorError] = useState({});
+  const [inputErrors, setInputErrors] = useState({});
   const [resetError, setResetError] = useState("");
 
   // redux state
-  const radius = useSelector((state) => state.preview.radius);
-  const bg = useSelector((state) => state.preview.bg);
-  const example = useSelector((state) => state.preview.example);
+  const { radius, bg: background, example } = useSelector(
+    (state) => state.preview
+  );
   const { setBgCol, setBoxCol, setBoxRadius } = useActions();
 
-  const handleBoxColorChange = (e, index, type) => {
-    // 1 - R
-    // 2 - G
-    // 3 - B
+  const exampleInputs = [
+    { label: "r", name: "box", value: example.r },
+    { label: "g", name: "box", value: example.g },
+    { label: "b", name: "box", value: example.b },
+  ];
+
+  const backgroundInputs = [
+    { label: "r", name: "bg", value: background.r },
+    { label: "g", name: "bg", value: background.g },
+    { label: "b", name: "bg", value: background.b },
+  ];
+
+  /**
+   * Handles color change for background and output box
+   * @param {Event} e - event object
+   * @param {number} index - elementy index
+   * @param {"r" | "g" | "b"} prop - color symbol
+   * @param {string} type - identifies which element should be changed
+   * @returns {undefined}
+   */
+  const handleBoxColorChange = (e, index, prop, type) => {
     const { error, value } = validateNumberInput(0, 255, e.target.value);
 
-    if (error && !Object.keys(colorError).length) {
-      setColorError({ type, index, error });
+    if (error && !Object.keys(inputErrors).length) {
+      setInputErrors({ name: type, index, error });
 
       setTimeout(() => {
-        setColorError({});
+        setInputErrors({});
       }, 3500);
     }
 
-    if (type === "box") {
-      const { r, g, b } = example;
-
-      switch (index) {
-        case 1:
-          setBoxCol(value, g, b);
-          break;
-
-        case 2:
-          setBoxCol(r, value, b);
-          break;
-
-        case 3:
-          setBoxCol(r, g, value);
-          break;
-
-        default:
-          throw new Error("Index does not exist");
-      }
-    } else {
-      const { r, g, b } = bg;
-
-      switch (index) {
-        case 1:
-          setBgCol(value, g, b);
-          break;
-
-        case 2:
-          setBgCol(r, value, b);
-          break;
-
-        case 3:
-          setBgCol(r, g, value);
-          break;
-
-        default:
-          throw new Error("Index does not exist");
-      }
-    }
+    if (type === "bg") setBgCol(prop, value);
+    else setBoxCol(prop, value);
   };
 
   const handleSettingsReset = () => {
     if (
-      bg.r === 255 &&
-      bg.g === 255 &&
-      bg.b === 255 &&
+      background.r === 255 &&
+      background.g === 255 &&
+      background.b === 255 &&
       example.r === 175 &&
       example.g === 193 &&
       example.b === 222 &&
@@ -93,18 +73,40 @@ const Settings = ({ visibility, setVisibility }) => {
       }, 5000);
     }
 
-    setBgCol(255, 255, 255);
-    setBoxCol(175, 193, 222);
+    setBgCol();
+    setBoxCol();
     setBoxRadius(0);
   };
 
   const handleRadiusChange = (e) => {
-    // TODO: add error handling
     const { error, value } = validateNumberInput(0, 100, e.target.value);
+
+    if (error && !Object.keys(inputErrors).length) {
+      setInputErrors({ name: "radius", error });
+
+      setTimeout(() => {
+        setInputErrors("");
+      }, 5000);
+    }
     setBoxRadius(value);
   };
 
-  // TODO refactor required
+  const renderInputs = (list) => {
+    return list.map((el, index) => {
+      return (
+        <label key={index}>
+          {el.label.toUpperCase()}
+          <Input
+            value={el.value}
+            onChange={(e) => handleBoxColorChange(e, index, el.label, el.name)}
+            name={el.name}
+            error={inputErrors.name === el.name && inputErrors.index === index}
+          />
+        </label>
+      );
+    });
+  };
+
   return (
     <>
       <Nav active={visibility}>
@@ -115,72 +117,17 @@ const Settings = ({ visibility, setVisibility }) => {
         <Section>
           <h2>Central box color</h2>
 
-          <label>
-            R
-            <Input
-              value={example.r}
-              onChange={(e) => handleBoxColorChange(e, 1, "box")}
-              type="number"
-              error={colorError.type === "box" && colorError.index === 1}
-            />
-          </label>
+          {renderInputs(exampleInputs)}
 
-          <label>
-            G
-            <Input
-              value={example.g}
-              onChange={(e) => handleBoxColorChange(e, 2, "box")}
-              type="number"
-              error={colorError.type === "box" && colorError.index === 2}
-            />
-          </label>
-
-          <label>
-            B
-            <Input
-              value={example.b}
-              onChange={(e) => handleBoxColorChange(e, 3, "box")}
-              type="number"
-              error={colorError.type === "box" && colorError.index === 3}
-            />
-          </label>
-          <Tooltip>{colorError.type === "box" && colorError.error}</Tooltip>
+          <Tooltip>{inputErrors.name === "box" && inputErrors.error}</Tooltip>
         </Section>
 
         <Section>
           <h2>Background color</h2>
 
-          <label>
-            R
-            <Input
-              value={bg.r}
-              onChange={(e) => handleBoxColorChange(e, 1, "bg")}
-              type="number"
-              error={colorError.type === "bg" && colorError.index === 1}
-            />
-          </label>
+          {renderInputs(backgroundInputs)}
 
-          <label>
-            G
-            <Input
-              value={bg.g}
-              onChange={(e) => handleBoxColorChange(e, 2, "bg")}
-              type="number"
-              error={colorError.type === "bg" && colorError.index === 2}
-            />
-          </label>
-
-          <label>
-            B
-            <Input
-              value={bg.b}
-              onChange={(e) => handleBoxColorChange(e, 3, "bg")}
-              type="number"
-              error={colorError.type === "bg" && colorError.index === 3}
-            />
-          </label>
-
-          <Tooltip>{colorError.type === "bg" && colorError.error}</Tooltip>
+          <Tooltip>{inputErrors.name === "bg" && inputErrors.error}</Tooltip>
         </Section>
 
         <Section>
@@ -188,9 +135,17 @@ const Settings = ({ visibility, setVisibility }) => {
 
           <label>
             Radius
-            <Input value={radius} onChange={handleRadiusChange} type="number" />
+            <Input
+              value={radius}
+              onChange={handleRadiusChange}
+              error={inputErrors.name === "radius"}
+            />
             %
           </label>
+
+          <Tooltip>
+            {inputErrors.name === "radius" && inputErrors.error}
+          </Tooltip>
         </Section>
 
         <Section>
@@ -249,12 +204,6 @@ const Input = styled.input`
 
   font-size: 1.1rem;
   color: white;
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
 `;
 
 const Section = styled.section`

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
  * Functional React component - renders range input on the screen
  * @returns {JSX.Element}
  */
-const Slider = ({ text, min, max, onChange, value }) => {
+const Slider = ({ text = "", min = 0, max = 10, onChange, value }) => {
   const [sliderPosition, setSliderPosition] = useState(0);
   const bar = useRef(null);
 

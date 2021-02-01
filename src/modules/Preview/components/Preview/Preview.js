@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -8,10 +8,13 @@ import { generateCode } from "helpers";
 import Info from "modules/Preview/components/Info";
 import Settings from "modules/Preview/components/Settings";
 
-const Preview = ({ bg, example, radius, list }) => {
+const Preview = () => {
   const [settingsVisibility, setSettingsVisibility] = useState(false);
   const [galleryVisibility, setGalleryVisibility] = useState(false);
   const [infoVisibility, setInfoVisibility] = useState(false);
+
+  const { bg, example, radius } = useSelector((state) => state.preview);
+  const list = useSelector((state) => state.boxShadowList);
 
   const toggleVisibility = (id) => {
     // 0 - gallery is visible
@@ -92,15 +95,4 @@ const OptionBar = styled.div`
   padding-right: 10px;
 `;
 
-const mapStateToProps = (state) => {
-  const { bg, example, radius } = state.preview;
-
-  return {
-    list: state.boxShadowList,
-    bg,
-    example,
-    radius,
-  };
-};
-
-export default connect(mapStateToProps, null)(Preview);
+export default Preview;

@@ -1,4 +1,5 @@
 import { actionType } from "../actions/types";
+import _ from "lodash";
 
 const INITIAL_STATE = {
   bg: { r: 255, g: 255, b: 255 },
@@ -9,10 +10,26 @@ const INITIAL_STATE = {
 const preview = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionType.SETBGCOL:
-      return { ...state, bg: action.payload };
+      if (action.payload) {
+        return _.set(
+          { ...state },
+          `bg.${action.payload.prop}`,
+          action.payload.value
+        );
+      }
+      return { ...state, bg: { r: 255, g: 255, b: 255 } };
 
     case actionType.SETEXAMPLECOL:
-      return { ...state, example: action.payload };
+      if (action.payload) {
+        const newState = _.set(
+          { ...state },
+          `example.${action.payload.prop}`,
+          action.payload.value
+        );
+
+        return newState;
+      }
+      return { ...state, example: { r: 175, g: 193, b: 222 } };
 
     case actionType.SETEXAMPLERADIUS:
       return { ...state, radius: action.payload };

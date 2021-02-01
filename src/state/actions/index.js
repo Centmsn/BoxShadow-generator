@@ -1,16 +1,20 @@
 import { actionType } from "./types";
 
-export const setBgCol = (r, g, b) => {
+export const setBgCol = (prop, value) => {
+  const shouldReset = prop && typeof value === "number";
+
   return {
     type: actionType.SETBGCOL,
-    payload: { r, g, b },
+    payload: shouldReset ? { prop, value: parseInt(value) } : null,
   };
 };
 
-export const setBoxCol = (r, g, b) => {
+export const setBoxCol = (prop, value) => {
+  const shouldReset = prop && typeof value === "number";
+
   return {
     type: actionType.SETEXAMPLECOL,
-    payload: { r, g, b },
+    payload: shouldReset ? { prop, value: parseInt(value) } : null,
   };
 };
 
